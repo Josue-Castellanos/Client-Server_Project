@@ -50,14 +50,19 @@ public class Client {
 
 	public void sendPacket() {
 		try {
+			// Send Login Packet from Main
 			outputStream.writeObject(packet);
 			outputStream.flush();
 
 			Scanner scanner = new Scanner(System.in);
 			while (clientSocket.isConnected()) {
 				String messageToSend = scanner.nextLine();
-				outputStream.write(username + ": " + messageToSend);
-				outputStream.newLine();
+
+				// Construct Packet
+
+
+				outputStream.writeObject(username + ": " + messageToSend);
+				// outputStream.newLine();
 				outputStream.flush();
 			}
 		}

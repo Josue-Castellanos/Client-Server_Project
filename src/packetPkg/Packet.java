@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Packet implements Serializable{
-	//private static final long serialVersionUID = 1L;	//Warning was given by IDE. This line was added to satisfy the warning condition.
 	protected PacketType type;
 	protected RequestType request;
 	protected StatusType status;
@@ -62,7 +61,7 @@ public class Packet implements Serializable{
 		this.setPacketType(packet);
 		this.setRequestType(request);
 		this.setUser(fromUser);
-		this.setGroup(trgtGroup);
+		//this.setGroup(trgtGroup);
 		this.setMessage(newMessage);
 	}
 
@@ -78,7 +77,7 @@ public class Packet implements Serializable{
 	public Packet(PacketType packet, RequestType request, Group trgtGroup) {
 		this.setPacketType(packet);
 		this.setRequestType(request);
-		this.setGroup(trgtGroup);
+		//this.setGroup(trgtGroup);
 	}
 
 	//SEND_MESSAGE_CHAT Constructor
@@ -101,7 +100,7 @@ public class Packet implements Serializable{
 	public Packet(PacketType packet, RequestType request,Group trgtGroup, User trgtUser) {
 		this.setPacketType(packet);
 		this.setRequestType(request);
-		this.setGroup(trgtGroup);
+		//this.setGroup(trgtGroup);
 		this.setUser(trgtUser);
 	}
 
@@ -146,19 +145,14 @@ public class Packet implements Serializable{
 		return msgList;
 	}
 
-	// Get Inet address (location)
-	public PacketReceiver getLocation(){
-		return location;
-	}
 
-	// Get
-	public Group getGroup(){
-		return this.Group;
-	}
+	//	public Group getGroup(){
+	//		return this.Group;
+	//	}
 
-	public Chat getChat(){
-		return this.Chat;
-	}
+	//	public Chat getChat(){
+	//		return this.Chat;
+	//	}
 
 	public ArrayList<PacketReceiver> getReceiverList(){
 		return receiverList;
@@ -172,10 +166,15 @@ public class Packet implements Serializable{
 		return chatList;
 	}
 
+	public ArrayList<User> getUserList(){
+		return userList;
+	}
+
 	public User getUser(){
 		return user;
 	}
 
+	// Get Inet address (location)
 	public String getLocation() {
 		return this.location;
 	}
@@ -184,12 +183,9 @@ public class Packet implements Serializable{
 		return this.port;
 	}
 
-	public ArrayList<User> getUserList(){
-		return userList;
-	}
 
-	public String getLocation(){
-		return location;
+	public String getString(){
+		return string;
 	}
 
 	/************************** Setters ****************************/
@@ -228,11 +224,11 @@ public class Packet implements Serializable{
 		this.receiverList =newList;
 	}
 
-	public void setGroupList(ArrayList<PacketReceiver.Group> newList){
+	public void setGroupList(ArrayList<Group> newList){
 		this.groupList = newList;
 	}
 
-	public void setChatList(ArrayList<PacketReceiver.Chat> newList){
+	public void setChatList(ArrayList<Chat> newList){
 		this.chatList = newList;
 	}
 
@@ -260,6 +256,4 @@ public class Packet implements Serializable{
 	public void setString(String newString){
 		this.string = newString;
 	}
-
-
 }

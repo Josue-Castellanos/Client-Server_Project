@@ -5,7 +5,7 @@ import packetPkg.*;
 
 
 
-public class PacketReceiver implements Runnable {
+public class PacketReceiver {
     public void receivePacket(Packet packet) {
         switch (packet.getPacketType()) {
             case LOGIN:
@@ -73,13 +73,7 @@ public class PacketReceiver implements Runnable {
         }
     }
 
-    @Override
-    public void run() {
-
-    }
-
     // Handling methods for each type of packet
-
     private void handleLoginPacket(Packet packet) {
         User user = packet.getUser(); // Get the user from the packet
         if (user != null) {

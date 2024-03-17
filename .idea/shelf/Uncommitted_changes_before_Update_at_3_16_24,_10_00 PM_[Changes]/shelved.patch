@@ -1,0 +1,96 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"3d450354-e00d-4e30-8b87-ed0544caf07e\" name=\"Changes\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/.gitignore\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/modules.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/Communication_Project.iml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/clientPkg/Client.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/clientPkg/GUI.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/clientPkg/Main.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/clientPkg/Menu.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/clientPkg/MenuChat.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/clientPkg/MenuGroup.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/packetPkg/Packet.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/packetPkg/PacketType.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/packetPkg/RequestType.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/packetPkg/StatusType.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/ClientHandler.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/ComSystem.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/Communication.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/Main.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/Message.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/MsgType.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/PacketReceiver.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/PacketUnwrapper.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/Server.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/User.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/serverPkg/UserType.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"HighlightingSettingsPerFile\">\n    <setting file=\"file://$PROJECT_DIR$/src/clientPkg/Main.java\" root0=\"FORCE_HIGHLIGHTING\" />\n  </component>\n  <component name=\"ProjectColorInfo\"><![CDATA[{\n  \"associatedIndex\": 3\n}]]></component>\n  <component name=\"ProjectId\" id=\"2diT5mAAPPwwcpqbnJc2vc8UNU4\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"Application.Main.executor\": \"Run\",\n    \"Application.Server.executor\": \"Run\",\n    \"Application.clientPkg.Main.executor\": \"Run\",\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"git-widget-placeholder\": \"main\",\n    \"kotlin-language-version-configured\": \"true\",\n    \"last_opened_file_path\": \"/Users/workcomputer/IntelliJProjects/Communication_Project/src/clientPkg\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"onboarding.tips.debug.path\": \"/Users/workcomputer/IntelliJProjects/Communication_Project/src/Main.java\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src/clientPkg\" />\n      <recent name=\"$PROJECT_DIR$/src/packetPkg\" />\n      <recent name=\"$PROJECT_DIR$/src/serverPkg\" />\n      <recent name=\"$PROJECT_DIR$/src\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.clientPkg.Main\">\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"serverPkg.Main\" />\n      <module name=\"Communication_Project\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"serverPkg.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"clientPkg.Main\" type=\"Application\" factoryName=\"Application\" singleton=\"false\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"clientPkg.Main\" />\n      <module name=\"Communication_Project\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"clientPkg.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <list>\n      <item itemvalue=\"Application.clientPkg.Main\" />\n      <item itemvalue=\"Application.Main\" />\n    </list>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.clientPkg.Main\" />\n        <item itemvalue=\"Application.Main\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"jdk-11.0.22-corretto-11.0.22-4caba194b151-396cc1b2\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"3d450354-e00d-4e30-8b87-ed0544caf07e\" name=\"Changes\" comment=\"\" />\n      <created>1710489718387</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1710489718387</updated>\n      <workItem from=\"1710489719453\" duration=\"47057000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <breakpoint enabled=\"true\" type=\"java-exception\">\n          <properties class=\"java.lang.NullPointerException\" package=\"java.lang\" />\n          <option name=\"timeStamp\" value=\"4\" />\n        </breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 36e7ab3b28bf500e9c11c1070945c6d548016e22)
++++ b/.idea/workspace.xml	(date 1710651518269)
+@@ -4,36 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Communication_Project.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/clientPkg/Client.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/clientPkg/GUI.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/clientPkg/Main.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/clientPkg/Menu.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/clientPkg/MenuChat.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/clientPkg/MenuGroup.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/packetPkg/Packet.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/packetPkg/PacketType.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/packetPkg/RequestType.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/packetPkg/StatusType.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/ComSystem.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/Communication.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/Main.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/Message.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/MsgType.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/PacketReceiver.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/PacketUnwrapper.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/Server.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/User.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/serverPkg/UserType.java" afterDir="false" />
+-    </list>
++    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Initial commit" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -48,6 +19,20 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++  </component>
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN",
++    "assignee": "Josue-Castellanos"
++  }
++}]]></component>
++  <component name="GithubPullRequestsUISettings">
++    <option name="selectedUrlAndAccountId">
++      <UrlAndAccount>
++        <option name="accountId" value="adb85138-5282-41ec-a3ab-a48228ae0666" />
++        <option name="url" value="https://github.com/Josue-Castellanos/Client-Server_Project.git" />
++      </UrlAndAccount>
++    </option>
+   </component>
+   <component name="HighlightingSettingsPerFile">
+     <setting file="file://$PROJECT_DIR$/src/clientPkg/Main.java" root0="FORCE_HIGHLIGHTING" />
+@@ -142,12 +127,25 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1710489718387</updated>
+-      <workItem from="1710489719453" duration="47057000" />
++      <workItem from="1710489719453" duration="47658000" />
+     </task>
++    <task id="LOCAL-00001" summary="Initial commit">
++      <option name="closed" value="true" />
++      <created>1710651093649</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1710651093649</updated>
++    </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="Initial commit" />
++    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>

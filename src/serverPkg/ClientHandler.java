@@ -1,13 +1,9 @@
 package serverPkg;
 
-import java.io.IOException;
+import java.io.*;
 //import java.io.ObjectInputStream;
 //import java.io.ObjectOutputStream;
 //import java.io.OutputStream;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
 import packetPkg.Packet;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -17,12 +13,11 @@ public class ClientHandler implements Runnable {
 
 	public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 	private Socket clientSocket;
-	private BufferedReader inputStream;
-	private BufferedWriter outputStream;
-	private ObjectOutputStream outputStream;
+	private BufferedWriter bufferedWriter;
+	private BufferedReader bufferedReader;
+
 	private ObjectInputStream inputStream;
-	private PacketReceiver packetReceived;
-	private Packet packetSent;
+	private Packet packet;
     private String clientUsername;
    
     
@@ -31,24 +26,19 @@ public class ClientHandler implements Runnable {
 		
 		try {
 			this.clientSocket = socket;
-			//this.outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-			//this.inputStream = new ObjectInputStream(clientSocket.getInputStream());
-		
-		/*============== REMOVE AFTERWARDS ===================*/
-			this.outputStream = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-			this.inputStream = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-	    /*=================== ENDING ===================*/
+			this.inputStream = new ObjectInputStream(clientSocket.getInputStream());
+			this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+			this.bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			this.packet = (Packet) inputStream.readObject();
+			this.clientUsername = packet.getUser().username;
 
-			this.clientUsername = inputStream.readLine();
-			// Packet packet = (Packet) inputStream.readObject();
-			// clientUsername = packet.getGenUser().username;
-			
 			clientHandlers.add(this);
+			// send this code to packet receiver to add to list once chat is created
 			// packet.getGroup().userList.add(clientUsername);
 			broadcastMessage("SERVER: " + clientUsername + " has entered the chat!");	
 		}
-		catch (IOException e) {
-			closeChat(clientSocket, inputStream, outputStream);
+		catch (IOException | ClassNotFoundException e) {
+			closeChat(clientSocket, inputStream, bufferedWriter, bufferedReader);
 		}
 	}
 
@@ -64,7 +54,7 @@ public class ClientHandler implements Runnable {
 				broadcastMessage(messageFromPacket);
 			}
 			catch (IOException e) {
-				closeChat(clientSocket, inputStream, outputStream);
+				closeChat(clientSocket, inputStream, bufferedWriter, bufferedReader);
 				break;
 			}
 		}
@@ -76,13 +66,13 @@ public class ClientHandler implements Runnable {
 				// If the clients name in the clientHandlers list does not match the
 				// username broadcast the message to that client
 				if(!clientHandler.clientUsername.equals(clientUsername)) {
-					clientHandler.outputStream.write(messageToSend);
-					clientHandler.outputStream.newLine();
-					clientHandler.outputStream.flush();
+					clientHandler.bufferedWriter.write(messageToSend);
+					clientHandler.bufferedWriter.newLine();
+					clientHandler.bufferedWriter.flush();
 				}
 			}
 			catch(IOException e) {
-				closeChat(clientSocket, inputStream, outputStream);
+				closeChat(clientSocket, inputStream, bufferedWriter, bufferedReader);
 			}
 		}
 	}
@@ -92,15 +82,18 @@ public class ClientHandler implements Runnable {
 		broadcastMessage("SERVER: " + clientUsername + " has left the chat!");
 	}
 	
-	public void closeChat(Socket socket, BufferedReader inputStream, BufferedWriter outputStream) {
+	public void closeChat(Socket socket, ObjectInputStream inputStream, BufferedWriter bufferedWriter, BufferedReader bufferedReader) {
 		try {
 			removeClientHandler();
 
 			if(inputStream != null) {
 				inputStream.close();
 			}
-			if(outputStream != null) {
-				outputStream.close();
+			if(bufferedWriter != null) {
+				bufferedWriter.close();
+			}
+			if(bufferedReader != null) {
+				bufferedReader.close();
 			}
 			if(socket != null) {
 				socket.close();
