@@ -6,53 +6,45 @@ import java.io.Serializable;
 public class User implements Serializable{
 
 	protected String displayName;
-	//protected UserType userType;
 	protected String acctNum;
 	protected String username;
 	protected String password;
+    protected UserType userType;
 	protected ArrayList<String> groupList;	//Unique groupID should be stored here.
 	protected ArrayList<String> chatList;	//Unique chatID should be stored here.
-	//protected ArrayList<String> blockList;	//Unique userID should be stored here.
-	//protected ArrayList<String> inviteList;	//Unique groupID invited to Join
+    protected ArrayList<String> blockList;	//Unique userID should be stored here.
 	protected boolean status;
 
 	public User() {
-		this(null,null,null);
-	} //userType null);
+		this(null,null,null, null);
+	}
 	
-    public User(String displayName, String username, String password) {  // UserType userType) {
+    public User(String displayName, String username, String password, UserType userType) {
         this.displayName = displayName;
         this.username = username;
         this.password = password;
-        //this.userType = userType;
         this.status = true;
         this.groupList = new ArrayList<String>();
         this.chatList = new ArrayList<String>();
-//        this.blockList = new ArrayList<String>();
-//        this.inviteList = new ArrayList<String>();
+        this.blockList = new ArrayList<String>();
+        this.userType = userType;
     }
-    
     //Copy constructor
-//    public User(User newUser) {
-//    	this.displayName = newUser.displayName;
-//        this.username = newUser.getUsername();
-//        this.password = newUser.getPassword();
-//        this.userType = newUser.getUserType();
-//        this.status = newUser.getStatus();
-//        this.acctNum = newUser.getAcctNum();
-//        this.groupList = newUser.groupList;
-//        this.chatList = newUser.chatList;
-//        this.blockList = newUser.getBlockList();
-//        this.inviteList = newUser.getInviteList();
-//    }
+    public User(User newUser) {
+    	this.displayName = newUser.displayName;
+        this.username = newUser.getUsername();
+        this.password = newUser.getPassword();
+        this.status = newUser.getStatus();
+        this.acctNum = newUser.getAcctNum();
+        this.groupList = newUser.groupList;
+        this.chatList = newUser.chatList;
+        this.blockList = newUser.blockList;
+        this.userType = newUser.getUserType();
+    }
 
     public String getDisplayName() {
         return displayName;
     }
-
-//    public UserType getUserType() {
-//        return userType;
-//    }
 
     public String getAcctNum() {
         return acctNum;
@@ -66,13 +58,13 @@ public class User implements Serializable{
         return password;
     }
 
-//    public boolean getStatus() {
-//        return status;
-//    }
+    public boolean getStatus() {
+        return status;
+    }
 
-//    public ArrayList<String> getBlockList() {
-//        return blockList;
-//    }
+    public UserType getUserType() {
+        return userType;
+    }
     
     public ArrayList<String> getGroupList() {
         return groupList;
@@ -81,10 +73,10 @@ public class User implements Serializable{
     public ArrayList<String> getChatList() {
         return chatList;
     }
-    
-//    public ArrayList<String> getInviteList() {
-//        return inviteList;
-//    }
+
+    public ArrayList<String> getBlockList() {
+        return blockList;
+    }
     
     /****************	Setters	***********************/
     public void setDisplayName(String newName) {
@@ -102,18 +94,10 @@ public class User implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-    
-//    public void setUserType(UserType type) {
-//        this.userType = type;
-//       }
 
-//    public void setStatus(boolean newStatus) {
-//        this.status = newStatus;
-//    }
-
-//    public void setBlockList(ArrayList<String> blockList) {
-//      this.blockList = new ArrayList<String>(blockList);
-//    }
+    public void setStatus(boolean newStatus) {
+        this.status = newStatus;
+    }
     
     public void setGroupList(ArrayList<String> newGroup) {
     	this.groupList= newGroup;
@@ -122,12 +106,12 @@ public class User implements Serializable{
     public void setChatList(ArrayList<String> newChat) {
     	this.chatList= newChat;
     }
+
+    public void setBlockList(ArrayList<String> newBlock) {
+        this.blockList= newBlock;
+    }
     
     /**********************	Mutators	*********************/
-//    public void addToBlockList(String acctNum) {
-//    	blockList.add(acctNum);
-//    }
-    
     public void addToGroupList(String newGroup) {
     	groupList.add(newGroup);
     }
@@ -136,14 +120,6 @@ public class User implements Serializable{
     	chatList.add(newChat);
     }
     
-//    public void addToInviteList(String newInvite) {
-//    	inviteList.add(newInvite);
-//    }
-    
-//    public void removeFromBlockList(String acctNum) {
-//    	blockList.remove(acctNum);
-//    }
-    
     public void removeFromGroupList(String trgtGroup) {
     	groupList.remove(trgtGroup);
     }
@@ -151,11 +127,10 @@ public class User implements Serializable{
     public void removeFromChatList(String trgtChat) {
     	chatList.remove(trgtChat);
     }
-    
-//    public void removeFromInviteList(String trgtInvite) {
-//    	inviteList.remove(trgtInvite);
-//    }
-    
+    public void addToBlockList(String newUser) {
+        blockList.add(newUser);
+    }
+}
 //    public class GeneralUser extends User {
 //
 //    	  public GeneralUser(String displayName, String username, String password, UserType userType) {
@@ -165,9 +140,7 @@ public class User implements Serializable{
 //		/* public void reportIT(String acctNum) {
 //		        // implementation to report an issue to the IT department
 //		    }*/
-//
 //    }
-  
 //    public class ITUser extends User {
 //
 //    	  public ITUser(String displayName, String username, String password, UserType userType) {
@@ -196,8 +169,6 @@ public class User implements Serializable{
 //        }*/
 //
 //    }
-    
-}
 
 
 

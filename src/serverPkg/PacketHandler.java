@@ -1,11 +1,11 @@
 package serverPkg;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
 import packetPkg.*;
 
-
-
-public class PacketReceiver {
+public class PacketHandler {
     public void receivePacket(Packet packet) {
         switch (packet.getPacketType()) {
             case LOGIN:
@@ -22,18 +22,6 @@ public class PacketReceiver {
                     case SEND_MESSAGE_CHAT:
                         handleChatMessagePacket(packet);
                         break;
-//                    case REQUEST_BLOCK_LIST:
-//                        handleBlockListRequestPacket(packet);
-//                        break;
-//                    case REQUEST_INVITE_LIST:
-//                        handleInviteListRequestPacket(packet);
-//                        break;
-//                    case REQUEST_GROUP_LIST:
-//                        handleGroupListRequestPacket(packet);
-//                        break;
-//                    case REQUEST_CHAT_LIST:
-//                        handleChatListRequestPacket(packet);
-//                        break;
                     case RECEIVE_MESSAGE_GROUP:
                         handleReceivedGroupMessagePacket(packet);
                         break;
@@ -64,25 +52,39 @@ public class PacketReceiver {
 //                    case BLOCK_USER:
 //                        handleBlockUserPacket(packet);
 //                        break;
+//                    case REQUEST_BLOCK_LIST:
+//                        handleBlockListRequestPacket(packet);
+//                        break;
+//                    case REQUEST_INVITE_LIST:
+//                        handleInviteListRequestPacket(packet);
+//                        break;
+//                    case REQUEST_GROUP_LIST:
+//                        handleGroupListRequestPacket(packet);
+//                        break;
+//                    case REQUEST_CHAT_LIST:
+//                        handleChatListRequestPacket(packet);
+//                        break;
                     default:
-                        //handleUnknownPacket(packet);
+                        //handleUnknownRequest
                         break;
                 }
             default:
+                //handleUnknownPacket
                 break;
         }
     }
 
     // Handling methods for each type of packet
     private void handleLoginPacket(Packet packet) {
+        // Logic to handle login packet
         User user = packet.getUser(); // Get the user from the packet
         if (user != null) {
             // Perform authentication logic (e.g., check username/password against a database)
-            boolean isAuthenticated = authenticateUser(user.getUsername(), user.getPassword());
+            boolean isAuthenticated = backEnd.authenticateUser(user.getUsername(), user.getPassword());
             if (isAuthenticated) {
                 // Successful login
                 // Update user status, create session, etc.
-                user.setStatus(UserStatus.ONLINE);
+                user.setStatus(true);   // true = ONLINE
                 createSession(user);
                 System.out.println("User " + user.getUsername() + " logged in successfully.");
             } else {
@@ -94,32 +96,6 @@ public class PacketReceiver {
         }
     }
 
-    private boolean authenticateUser(String username, String password) {
-        // Simulated authentication logic (e.g., check against a database)
-        // This is just a placeholder. You should implement your authentication mechanism.
-        // Return true if authentication is successful, false otherwise.
-        // For the sake of this example, let's assume authentication always succeeds.
-        return true;
-    }
-
-    private void createSession(User user) {
-        // Logic to create a session for the user
-        // This might involve generating a session token, storing it in a session management system, etc.
-    }
-
-    private void handleLoginPacket(Packet packet) {
-
-        // Logic to handle login packet
-        comSystem.logout(packet.getUser());
-        out.writeObject(packet);
-        out.flush();
-        clientSocket.close();
-
-        //comSystem.writeToChat(packet.getChat(), packet.getMessage());
-        //packet.setStatusType(StatusType.SUCCESS);
-        //out.writeObject(packet);
-        //out.flush();
-    }
 
     private void handleLogoutPacket(Packet packet) {
         // Logic to handle logout packet
@@ -140,21 +116,7 @@ public class PacketReceiver {
         out.writeObject(packet);
         out.flush();
     }
-//    private void handleBlockListRequestPacket(Packet packet) {
-//        // Logic to handle block list request packet
-//    }
 
-//    private void handleInviteListRequestPacket(Packet packet) {
-//        // Logic to handle invite list request packet
-//    }
-
-//    private void handleGroupListRequestPacket(Packet packet) {
-//        // Logic to handle group list request packet
-//    }
-//
-//    private void handleChatListRequestPacket(Packet packet) {
-//        // Logic to handle chat list request packet
-//    }
     private void handleReceivedGroupMessagePacket(Packet packet) {
         // Logic to handle received group message packet
         packet = comSystem.readGroup(packet.getGroup());
@@ -202,20 +164,53 @@ public class PacketReceiver {
         out.writeObject(packet);
         out.flush();
     }
+
+    //    private void handleBlockListRequestPacket(Packet packet) {
+//        // Logic to handle block list request packet
+//    }
+
+//    private void handleInviteListRequestPacket(Packet packet) {
+//        // Logic to handle invite list request packet
+//    }
+
+    //    private void handleGroupListRequestPacket(Packet packet) {
+//        // Logic to handle group list request packet
+//    }
+//
+//    private void handleChatListRequestPacket(Packet packet) {
+//        // Logic to handle chat list request packet
+//    }
 //    private void handleReceivedInviteListPacket(Packet packet) {
 //        // Logic to handle received invite list packet
+    //            		//comSystem.addUserToGroup(packet.getUser(), packet.getGroup());
+//            		packet.setStatusType(StatusType.SUCCESS);
+//            		out.writeObject(packet);
+//            		out.flush();
 //    }
-//
 //    private void handleKickUserPacket(Packet packet) {
 //        // Logic to handle kick user packet
+    //comSystem.removeUserFromGroup(packet.getString());
+//            		packet.setStatusType(StatusType.SUCCESS);
+//            		out.writeObject(packet);
+//            		out.flush();
 //    }
-//
+    // private void handleSendInvitePacket(Packet packet) {
+    // Logic to handle send invite packet
+    //            		packet = comSystem.sendInvite(packet.getUser(), packet.getGroup());
+//            		packet.setStatusType(StatusType.SUCCESS);
+//            		out.writeObject(packet);
+//            		out.flush();
+
 //    private void handleReportUserPacket(Packet packet) {
 //        // Logic to handle report user packet
 //    }
 //
 //    private void handleBlockUserPacket(Packet packet) {
 //        // Logic to handle block user packet
+//            		//packet = comSystem.addBlockList(packet.getUser(), packet.getBlocked());
+//            		packet.setStatusType(StatusType.SUCCESS);
+//            		out.writeObject(packet);
+//            		out.flush();
 //    }
 //
 //    private void handleUnknownPacket(Packet packet) {
@@ -224,30 +219,4 @@ public class PacketReceiver {
 //    }
 }
 
-//            	case KICK_USER:
-//            		comSystem.removeUserFromGroup(packet.getString());
-//            		packet.setStatusType(StatusType.SUCCESS);
-//            		out.writeObject(packet);
-//            		out.flush();
-//	            	break;
-//            	case SEND_INVITE:
-//            		packet = comSystem.sendInvite(packet.getUser(), packet.getGroup());
-//            		packet.setStatusType(StatusType.SUCCESS);
-//            		out.writeObject(packet);
-//            		out.flush();
-//	            	break;
-//            	case RECEIVE_INVITE:
-//            		//comSystem.addUserToGroup(packet.getUser(), packet.getGroup());
-//            		packet.setStatusType(StatusType.SUCCESS);
-//            		out.writeObject(packet);
-//            		out.flush();
-//	            	break;
-//            	case REPORT_USER:
-//            		//ITuser is made?
-//	            	break;
-//            	case BLOCK_USER:
-//            		//packet = comSystem.addBlockList(packet.getUser(), packet.getBlocked());
-//            		packet.setStatusType(StatusType.SUCCESS);
-//            		out.writeObject(packet);
-//            		out.flush();
-//	            	break;
+

@@ -2,6 +2,7 @@ package serverPkg;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class Chat {
     //Fields for the Chat Class
@@ -9,8 +10,8 @@ public class Chat {
     protected ArrayList<Message> msgList;	//Holds the list of message objects
     protected Date created;		//Date the Receiver was created
     protected String createdByUser; //Name of user who created the Receiver
-    private String chatID;
-    private int chatCount = 1;
+    private final String chatID;
+    private static final int chatCount = 1;
     private String chatName;        // ChatName is the username of the recipient
 
     //Constructor
@@ -19,7 +20,7 @@ public class Chat {
         this.userList = userList;
         this.msgList = msgList;
         this.created = new Date();
-        this.chatID = idGenerator("C");
+        this.chatID = idGenerator();
     }
 
 
@@ -59,10 +60,11 @@ public class Chat {
         return created.toString();
     }
 
-    //Generates IDs for groups and chats.
-    private String idGenerator(String chatType ) {
-        String temp = chatType;
-        return receiver + temp;
+    //Generates IDs for chats.
+    private String idGenerator() {
+        // Generate random id, for example 283952-V8M32
+        Random rnd = new Random();
+        return (100000 + rnd.nextInt(900000)) + "-" + "C";
     }
 
     //Searches for in the list

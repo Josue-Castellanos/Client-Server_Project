@@ -2,16 +2,15 @@ package serverPkg;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class Group {
-    //Fields for the Group Class - Child of Receiver
-    //private String leadMod;			//Current lead moderator of a group - Default is the creator of the group
-    // private ArrayList<String> moderators;	//Additional moderators added by the lead moderator
+    //Fields for the Group Class
     protected ArrayList<String> userList;	//Holds the list of users
     protected ArrayList<Message> msgList;	//Holds the list of message objects
     protected Date created;		//Date the Receiver was created
     protected String createdByUser; //Name of user who created the Receiver
-    private int groupCount = 0;
+    private static int groupCount = 0;
     private String groupID;			//Uniquely Generated groupID
     private String groupName;		//Name for the Group. Doesn't have to be unique at the moment. Can implement uniqueness later if needed.
     public boolean isPrivate;		//Indicates whether the group is designated private or public. If private, should not be accessible by users not on the userList.
@@ -24,47 +23,13 @@ public class Group {
         isPrivate = privacy;
         groupName = newGroupName;
         created = new Date();
-        groupID = idHelper(groupCount, "Grp-");
+        groupID = idGenerator();
         groupCount++;
     }
 
     public String getGroupID() {
         return groupID;
     }
-
-    //		public String getLeadModerator() {
-    //			return leadMod;
-    //		}
-
-    //		public void changeLeadModerator(String userID) {
-    //			leadMod = userID;
-    //		}
-
-    //		public ArrayList<String> getModerators() {
-    //			return moderators;
-    //		}
-    //Adds a moderator to the list
-    //		public void addModerator(String userID) {
-    //			int index = findHelper(userID, moderators);
-    //			if (index == -1) {
-    //				moderators.add(userID);
-    //				Collections.sort(moderators);
-    //			}
-    //			else {
-    //				//System.out.println("\nUser " + userID + " is already a member. \n");
-    //			}
-    //		}
-
-    //Removes a moderator from the list
-    //		public void removeModerator(String userID) {
-    //			int index = findHelper(userID, moderators);
-    //			if (index != -1) {
-    //				moderators.add(userID);
-    //			}
-    //			else {
-    //				//System.out.println("\nUser " + userID + " is already a member. \n");
-    //			}
-    //		}
 
     public String getGroupname() {
         return groupName;
@@ -102,11 +67,11 @@ public class Group {
         return;
     }
 
-    //Generates IDs for groups and chats.
-    private String idHelper(int counter, String receiver ) {
-        String temp = new String();
-        temp = ("00000000" + Integer.toString(counter)).substring(Integer.toString(counter).length()); //Converts counter to a string, and adds leading zeroes.
-        return receiver + temp;
+    //Generates IDs for groups.
+    private String idGenerator() {
+        // Generate random id, for example 283952-V8M32
+        Random rnd = new Random();
+        return (100000 + rnd.nextInt(900000)) + "-" + "G";
     }
 
     //Searches for in the list

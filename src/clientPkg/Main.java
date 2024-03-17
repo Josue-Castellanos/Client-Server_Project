@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 import packetPkg.Packet;
-import packetPkg.PacketType;
+import packetPkg.RequestType;
 import serverPkg.User;
 
 public class Main {
@@ -22,7 +22,7 @@ public class Main {
 
 		User user = new User(username, username, password);
 
-		Packet loginPacket = new Packet(PacketType.LOGIN, user);
+		Packet loginPacket = new Packet(RequestType.LOGIN, user);
 
 		Socket socket = new Socket(LOCATION, PORT);
 

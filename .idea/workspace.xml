@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Initial commit">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24__10_00PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24__10_00PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientPkg/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientPkg/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/packetPkg/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/packetPkg/Packet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/PacketReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/PacketReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/packetPkg/PacketType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/packetPkg/PacketType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/packetPkg/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/packetPkg/RequestType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/ComSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/BackEnd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/Communication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/PacketReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/PacketHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/PacketUnwrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/PacketUnwrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +29,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -65,6 +75,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/workcomputer/IntelliJProjects/Communication_Project/src/clientPkg&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -73,6 +84,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;/Users/workcomputer/IntelliJProjects/Communication_Project/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -125,7 +137,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-396cc1b2" />
+        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-868cef46" />
       </set>
     </attachedChunks>
   </component>
@@ -138,6 +150,9 @@
       <option name="presentableId" value="Default" />
       <updated>1710489718387</updated>
       <workItem from="1710489719453" duration="52901000" />
+      <workItem from="1710657895860" duration="200000" />
+      <workItem from="1710658106418" duration="42000" />
+      <workItem from="1710658159086" duration="9042000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
