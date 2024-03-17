@@ -29,24 +29,6 @@ public class Client {
 			closeChat(clientSocket, bufferedReader, outputStream);
 		}
 	}
-//	public void sendMessage() {
-//		try {
-//			outputStream.write(username);
-//			outputStream.newLine();
-//			outputStream.flush();
-//
-//			Scanner scanner = new Scanner(System.in);
-//			while (clientSocket.isConnected()) {
-//				String messageToSend = scanner.nextLine();
-//				outputStream.write(username + ": " + messageToSend);
-//				outputStream.newLine();
-//				outputStream.flush();
-//			}
-//		} catch (IOException e) {
-//			closeChat(clientSocket, inputStream, outputStream);
-//
-//		}
-//	}
 
 	public void sendPacket() {
 		try {

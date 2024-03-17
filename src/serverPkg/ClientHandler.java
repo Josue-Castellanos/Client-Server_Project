@@ -10,14 +10,13 @@ import java.util.ArrayList;
 
 public class ClientHandler implements Runnable {
 
-
 	public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 	private Socket clientSocket;
 	private BufferedWriter bufferedWriter;
 	private BufferedReader bufferedReader;
-
 	private ObjectInputStream inputStream;
 	private Packet packet;
+	private PacketHandler packetHandler = new PacketHandler();
     private String clientUsername;
    
     
@@ -29,8 +28,14 @@ public class ClientHandler implements Runnable {
 			this.inputStream = new ObjectInputStream(clientSocket.getInputStream());
 			this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 			this.bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+			// Reads Login Packet
 			this.packet = (Packet) inputStream.readObject();
+			if (packetHandler.receivePacket(packet)) {
+				return;
+			}
 			this.clientUsername = packet.getUser().username;
+
 
 			clientHandlers.add(this);
 			// send this code to packet receiver to add to list once chat is created
@@ -48,8 +53,8 @@ public class ClientHandler implements Runnable {
 		
 		while (clientSocket.isConnected()) {
 			try {
-				// packet = ObjectInputStream.readObject();
-				//messageFromPacket = packet.getMessage().message;
+				packet = ObjectInputStream.readObject();
+				messageFromPacket = packet.getMessage().message;
 				messageFromPacket = inputStream.readLine();
 				broadcastMessage(messageFromPacket);
 			}

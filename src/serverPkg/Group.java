@@ -5,33 +5,35 @@ import java.util.Date;
 import java.util.Random;
 
 public class Group {
-    //Fields for the Group Class
+
     protected ArrayList<String> userList;	//Holds the list of users
     protected ArrayList<Message> msgList;	//Holds the list of message objects
     protected Date created;		//Date the Receiver was created
     protected String createdByUser; //Name of user who created the Receiver
-    private static int groupCount = 0;
-    private String groupID;			//Uniquely Generated groupID
-    private String groupName;		//Name for the Group. Doesn't have to be unique at the moment. Can implement uniqueness later if needed.
+    private int groupCount;
+    private int groupMessages;
+    private final String groupID;		//Uniquely Generated groupID
+    private final String groupName;		//Name for the Group. Doesn't have to be unique at the moment. Can implement uniqueness later if needed.
     public boolean isPrivate;		//Indicates whether the group is designated private or public. If private, should not be accessible by users not on the userList.
 
     //Group Constructor
     public Group(String user, boolean privacy, String newGroupName) {
-        //leadMod = user;
-        createdByUser = user;
-        //addUser to the list. Need to implement.
-        isPrivate = privacy;
-        groupName = newGroupName;
-        created = new Date();
-        groupID = idGenerator();
-        groupCount++;
+        this.createdByUser = user;
+        this.isPrivate = privacy;
+        this.groupName = newGroupName;
+        this.userList = new ArrayList<>();
+        this.msgList = new ArrayList<>();
+        this.created = new Date();
+        this.groupID = idGenerator();
+        this.groupMessages = 0;
+        this.groupCount = 0;
     }
 
     public String getGroupID() {
         return groupID;
     }
 
-    public String getGroupname() {
+    public String getGroupName() {
         return groupName;
     }
 
@@ -58,13 +60,6 @@ public class Group {
 
     public String getDate() {
         return created.toString();
-    }
-
-    public void deleterGroup() {
-        //Need to implement
-    }
-    public void getGroup() {
-        return;
     }
 
     //Generates IDs for groups.

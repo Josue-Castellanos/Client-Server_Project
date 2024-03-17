@@ -13,8 +13,8 @@ public class Packet implements Serializable{
 	protected ArrayList<Message> msgList;
 	protected String location;
 	protected int port;
-	protected PacketHandler group;
-	protected PacketHandler chat;
+	protected Group group;
+	protected Chat chat;
 	protected ArrayList<PacketHandler> receiverList;
 	protected ArrayList<PacketHandler>groupList;
 	protected ArrayList<PacketHandler>chatList;
@@ -143,7 +143,7 @@ public class Packet implements Serializable{
 	}
 
 	public Group getGroup(){
-		return this.Group;
+		return Group;
 	}
 
 	public Chat getChat(){
@@ -155,11 +155,11 @@ public class Packet implements Serializable{
 	}
 
 	public ArrayList<Group> getGroupList(){
-		return groupList;
+		return groups;
 	}
 
 	public ArrayList<Chat> getChatList(){
-		return chatList;
+		return chats;
 	}
 
 	public ArrayList<User> getUserList(){

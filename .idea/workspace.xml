@@ -7,18 +7,14 @@
     <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Initial commit">
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24__10_00PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24__10_00PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientPkg/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientPkg/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/packetPkg/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/packetPkg/Packet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/packetPkg/PacketType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/packetPkg/PacketType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/packetPkg/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/packetPkg/RequestType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/BackEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/serverPkg/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Chat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/ComSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/BackEnd.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/Communication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/serverPkg/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/PacketReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/PacketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/PacketUnwrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/PacketUnwrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/PacketHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/PacketUnwrapper.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +149,9 @@
       <workItem from="1710657895860" duration="200000" />
       <workItem from="1710658106418" duration="42000" />
       <workItem from="1710658159086" duration="9042000" />
+      <workItem from="1710700731327" duration="40000" />
+      <workItem from="1710700835545" duration="21000" />
+      <workItem from="1710700864198" duration="15286000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -167,6 +166,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
