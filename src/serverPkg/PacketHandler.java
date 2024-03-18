@@ -2,42 +2,44 @@ package serverPkg;
 
 import packetPkg.*;
 
+import java.util.Objects;
+
 public class PacketHandler {
-    private Database databaseCommunication;
-    public void receivePacket(Packet packet) {
-        switch (packet.getPacketType()) {
-            case LOGIN:
-                handleLoginPacket(packet);
-                break;
-            case LOGOUT:
-                handleLogoutPacket(packet);
-                break;
-            case REQUEST:
-                switch (packet.getRequestType()) {
-                    case SEND_MESSAGE_GROUP:
-                        handleGroupMessagePacket(packet);
-                        break;
-                    case SEND_MESSAGE_CHAT:
-                        handleChatMessagePacket(packet);
-                        break;
-                    case RECEIVE_MESSAGE_GROUP:
-                        handleReceivedGroupMessagePacket(packet);
-                        break;
-                    case RECEIVE_MESSAGE_CHAT:
-                        handleReceivedChatMessagePacket(packet);
-                        break;
-                    case CREATE_GROUP:
-                        handleCreateGroupPacket(packet);
-                        break;
-                    case CREATE_CHAT:
-                        handleCreateChatPacket(packet);
-                        break;
-                    case JOIN_GROUP:
-                        handleJoinGroupPacket(packet);
-                        break;
-                    case LEAVE_GROUP:
-                        handleLeaveGroupPacket(packet);
-                        break;
+    private Database db;
+    private String status;
+    public String receivePacket(Packet packet) {
+        if (Objects.requireNonNull(packet.getPacketType()) == PacketType.REQUEST) {
+            switch (packet.getRequestType()) {
+                case SEND_MESSAGE_GROUP:
+                    status = handleGroupMessagePacket(packet).toString();
+                    break;
+                case SEND_MESSAGE_CHAT:
+                    status = handleChatMessagePacket(packet).toString();
+                    break;
+                case RECEIVE_MESSAGE_GROUP:
+                    status = handleReceivedGroupMessagePacket(packet).toString();
+                    break;
+                case RECEIVE_MESSAGE_CHAT:
+                    status = handleReceivedChatMessagePacket(packet).toString();
+                    break;
+                case CREATE_GROUP:
+                    status = handleCreateGroupPacket(packet).toString();
+                    break;
+                case CREATE_CHAT:
+                    status = handleCreateChatPacket(packet).toString();
+                    break;
+                case JOIN_GROUP:
+                    status = handleJoinGroupPacket(packet).toString();
+                    break;
+                case LEAVE_GROUP:
+                    status = handleLeaveGroupPacket(packet).toString();
+                    break;
+                case LOGIN:
+                    status = handleLoginPacket(packet).toString();
+                    break;
+                case LOGOUT:
+                    status = handleLogoutPacket(packet).toString();
+                    break;
 //                    case RECEIVE_INVITE_LIST:
 //                        handleReceivedInviteListPacket(packet);
 //                        break;
@@ -62,32 +64,34 @@ public class PacketHandler {
 //                    case REQUEST_CHAT_LIST:
 //                        handleChatListRequestPacket(packet);
 //                        break;
-                    default:
-                        //handleUnknownRequest
-                        break;
-                }
-            default:
-                //handleUnknownPacket
-                break;
+                default:
+                    status = StatusType.FAIL.toString();
+                    break;
+            }
         }
+        return status;
     }
 
     /* ==============HANDLING METHODS ================== */
-    private boolean handleLoginPacket(Packet packet) {
-        // Logic to handle login packet
-        if (authenticateUser(packet.getUser())) {
-            createSession();
-        }
-        else {
-            return false;
-        }
-        return true;
+    private StatusType handleLoginPacket(Packet packet) {
 
+        // If authentication was successful:
+        // User will have User Status ONLINE
+        if (db.authenticateUser(packet.getUser()).equals(UserStatus.ONLINE)) {
+            // Set Packet Status to SUCCESSFUL request
+            packet.setStatusType(StatusType.SUCCESS);
+        }
+        // Packet Status FAIL when login authentication failed.
+        else {
+            packet.setStatusType(StatusType.FAIL);
+        }
+        return packet.getStatusType();
     }
 
 
     private void handleLogoutPacket(Packet packet) {
         // Logic to handle logout packet
+
 
     }
 
@@ -155,52 +159,7 @@ public class PacketHandler {
         out.flush();
     }
    /*============== SUPORTING METHODS ===================*/
-   public boolean authenticateUser(User user) {
-       User loadedUser = verify(user);
-       if(loadedUser.getUsername().equals("")) {
-           Packet packet = new Packet(PacketType.LOGIN, RequestType.NULL , loadedUser);
-           packet.setStatusType(StatusType.FAIL);
-           return packet;
-       }
-       Packet packet = new Packet(PacketType.LOGIN, RequestType.NULL , loadedUser);
-       packet.setStatusType(StatusType.SUCCESS);
-       return packet;
-   }
 
-    public User verify(User user) {
-        //so far only works with general users
-        for (int i = 0; i < userList.size(); i++) {
-            if (generalUser.get(i).getUsername().equals(user.getUsername()) &&
-                    generalUser.get(i).getPassword().equals(user.getPassword())) {
-                addConnectedUser(user);
-                return generalUser.get(i);
-            }
-        }
-        User failedUser = new User();
-        return failedUser;
-    }
-
-    private boolean authenticateUser(String username, String password) {
-        // Simulated authentication logic (e.g., check against a database)
-        User user = packet.getUser(); // Get the user from the packet
-        if (user != null) {
-            // Perform authentication logic (e.g., check username/password against a database)
-            boolean isAuthenticated = backEnd.authenticateUser(user.getUsername(), user.getPassword());
-            if (isAuthenticated) {
-                // Successful login
-                // Update user status, create session, etc.
-                user.setStatus(true);   // true = ONLINE
-                createSession(user);
-                System.out.println("User " + user.getUsername() + " logged in successfully.");
-            } else {
-                // Failed login
-                System.out.println("Login failed for user " + user.getUsername() + ". Invalid credentials.");
-            }
-        } else {
-            System.out.println("Invalid login packet. User data is missing.");
-        }
-        return true;
-    }
     //    private void handleBlockListRequestPacket(Packet packet) {
 //        // Logic to handle block list request packet
 //    }

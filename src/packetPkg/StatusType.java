@@ -1,5 +1,5 @@
 package packetPkg;
 
 public enum StatusType {
-	SUCCESS, FAIL, ONLINE, OFFLINE, NULL
+	SUCCESS, FAIL, ONLINE, OFFLINE, PROGRESS, NULL
 }

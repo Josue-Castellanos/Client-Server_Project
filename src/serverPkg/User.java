@@ -1,46 +1,50 @@
 package serverPkg;
 
+import packetPkg.StatusType;
+
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User implements Serializable {
 
 	protected String displayName;
 	protected String acctNum;
 	protected String username;
 	protected String password;
     protected UserType userType;
+    protected UserStatus userStatus;
 	protected ArrayList<String> groupList;	//Unique groupID should be stored here.
 	protected ArrayList<String> chatList;	//Unique chatID should be stored here.
     protected ArrayList<String> blockList;	//Unique userID should be stored here.
-	protected boolean status;
 
 	public User() {
-		this(null,null,null, null);
+		this(null,null,null, null, null);
 	}
 	
-    public User(String displayName, String username, String password, UserType userType) {
+    public User(String displayName, String username, String password, UserType userType, UserStatus userStatus) {
         this.displayName = displayName;
         this.username = username;
         this.password = password;
-        this.status = true;
+        this.userStatus = userStatus;
+        this.userType = userType;
         this.groupList = new ArrayList<String>();
         this.chatList = new ArrayList<String>();
         this.blockList = new ArrayList<String>();
-        this.userType = userType;
     }
-    //Copy constructor
-    public User(User newUser) {
-    	this.displayName = newUser.displayName;
-        this.username = newUser.getUsername();
-        this.password = newUser.getPassword();
-        this.status = newUser.getStatus();
-        this.acctNum = newUser.getAcctNum();
-        this.groupList = newUser.groupList;
-        this.chatList = newUser.chatList;
-        this.blockList = newUser.blockList;
-        this.userType = newUser.getUserType();
-    }
+//    //Copy constructor
+//    public User(User newUser) {
+//    	this.displayName = newUser.displayName;
+//        this.username = newUser.getUsername();
+//        this.password = newUser.getPassword();
+//        this.userStatus = userStatus;
+//
+//        this.status = newUser.getStatus();
+//        this.acctNum = newUser.getAcctNum();
+//        this.groupList = newUser.groupList;
+//        this.chatList = newUser.chatList;
+//        this.blockList = newUser.blockList;
+//        this.userType = newUser.getUserType();
+//    }
 
     public String getDisplayName() {
         return displayName;
@@ -58,8 +62,8 @@ public class User implements Serializable{
         return password;
     }
 
-    public boolean getStatus() {
-        return status;
+    public UserStatus getUserStatus() {
+        return userStatus;
     }
 
     public UserType getUserType() {
@@ -95,8 +99,8 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public void setStatus(boolean newStatus) {
-        this.status = newStatus;
+    public void setUserStatus(UserStatus newStatus) {
+        this.userStatus = newStatus;
     }
     
     public void setGroupList(ArrayList<String> newGroup) {

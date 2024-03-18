@@ -15,9 +15,8 @@ public class Packet implements Serializable{
 	protected int port;
 	protected Group group;
 	protected Chat chat;
-	protected ArrayList<PacketHandler> receiverList;
-	protected ArrayList<PacketHandler>groupList;
-	protected ArrayList<PacketHandler>chatList;
+	protected ArrayList<Group>groupList;
+	protected ArrayList<Chat>chatList;
 	protected User user;
 	protected ArrayList<User> userList;
 	protected String string;
@@ -25,13 +24,12 @@ public class Packet implements Serializable{
 	//Default Constructor
 	public Packet(){
 		this(null, null, null, null, null,
-				null, null, null, null,
+				null, null, null,
 				null, null, null, null);
 	}
 	// Custom Constructor
 	public Packet(PacketType newType, RequestType newRequest, StatusType newStatus, Message newMessage,
 				  ArrayList<Message> newMsgList, Group newGroup, Chat newChat,
-				  ArrayList<PacketHandler> newReceiverList,
 				  User newUser, ArrayList<User> newUserList, String newString, String newLocation, Integer newPort) {
 		this.setPacketType(newType);
 		this.setRequestType(newRequest);
@@ -40,7 +38,6 @@ public class Packet implements Serializable{
 		this.setMsgList(newMsgList);
 		this.setGroup(newGroup);
 		this.setChat(newChat);
-		this.setReceiverList(newReceiverList);
 		this.setUser(newUser);
 		this.setString(newString);
 		this.setUserList(newUserList);
@@ -65,12 +62,12 @@ public class Packet implements Serializable{
 	}
 
 	//Request BLOCK_LIST, INVITE_LIST, GROUP_LIST, CHAT_LIST Constructor
-		public Packet(PacketType packet, RequestType request, User newUser, String list){
-			this.setPacketType(packet);
-			this.setRequestType(request);
-			this.setUser(newUser);
-			this.setString(list);
-		}
+	public Packet(PacketType packet, RequestType request, User newUser, String list){
+		this.setPacketType(packet);
+		this.setRequestType(request);
+		this.setUser(newUser);
+		this.setString(list);
+	}
 
 	//RECEIVE_MESSAGE_GROUP and CREATE_GROUP Constructor
 	public Packet(PacketType packet, RequestType request, Group trgtGroup) {
@@ -143,23 +140,20 @@ public class Packet implements Serializable{
 	}
 
 	public Group getGroup(){
-		return Group;
+		return this.group;
 	}
 
 	public Chat getChat(){
-		return this.Chat;
+		return this.chat;
 	}
 
-	public ArrayList<PacketHandler> getReceiverList(){
-		return receiverList;
-	}
 
 	public ArrayList<Group> getGroupList(){
-		return groups;
+		return groupList;
 	}
 
 	public ArrayList<Chat> getChatList(){
-		return chats;
+		return chatList;
 	}
 
 	public ArrayList<User> getUserList(){
@@ -204,7 +198,7 @@ public class Packet implements Serializable{
 		this.msgList = newList;
 	}
 
-	public void setReceiver(PacketHandler newLocation){
+	public void setLocation(String newLocation){
 		this.location = newLocation;
 	}
 
@@ -216,9 +210,6 @@ public class Packet implements Serializable{
 		this.chat = newChat;
 	}
 
-	public void setReceiverList(ArrayList<PacketHandler> newList){
-		this.receiverList =newList;
-	}
 
 	public void setGroupList(ArrayList<Group> newList){
 		this.groupList = newList;
@@ -236,22 +227,12 @@ public class Packet implements Serializable{
 		this.userList = newUser;
 	}
 
-	public void setLocation(String newLocation){
-		this.string = newLocation;
+	public void setString(String newString){
+		this.string = newString;
 	}
 
 	public void setPort(Integer newInteger){
 		this.port = newInteger;
 	}
 
-	public void setString(String newString){
-		this.string = newString;
-	}
-
-	//	public void setGenUser(User.GeneralUser newUser){
-	//		this.genUser = newUser;
-	//	}
-	//	public void setITUser(User.ITUser newUser){
-	//		this.ITUser = newUser;
-	//	}
 }

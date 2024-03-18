@@ -31,9 +31,13 @@ public class ClientHandler implements Runnable {
 
 			// Reads Login Packet
 			this.packet = (Packet) inputStream.readObject();
-			if (packetHandler.receivePacket(packet)) {
-				return;
+
+
+			while (packetHandler.receivePacket(packet) == "INVALID") {
+
 			}
+
+
 			this.clientUsername = packet.getUser().username;
 
 

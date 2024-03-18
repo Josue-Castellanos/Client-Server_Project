@@ -1,8 +1,5 @@
 package packetPkg;
 
 public enum PacketType {
-    LOGIN,   //Login Packet
-    LOGOUT,  //Logout Packet
-    REQUEST, //Request packet
-    NULL
+    REQUEST //Request packet
 }

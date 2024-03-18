@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 import packetPkg.Packet;
+import packetPkg.PacketType;
 import packetPkg.RequestType;
 import serverPkg.User;
+import serverPkg.UserStatus;
+import serverPkg.UserType;
 
 public class Main {
 
@@ -20,9 +23,13 @@ public class Main {
 		System.out.println("Enter password: ");
 		String password = scanner.nextLine();
 
-		User user = new User(username, username, password);
+		User user = new User(username, username, password, UserType.GENERAL, UserStatus.PROGRESS);
 
-		Packet loginPacket = new Packet(RequestType.LOGIN, user);
+		// Construct Packet
+		Packet loginPacket = new Packet();
+		loginPacket.setPacketType(PacketType.REQUEST);
+		loginPacket.setRequestType(RequestType.LOGIN);
+		loginPacket.setUser(user);
 
 		Socket socket = new Socket(LOCATION, PORT);
 
@@ -30,7 +37,6 @@ public class Main {
 
 		client.listenForMessage();
 		client.sendPacket();
-		//client.sendMessage();
 	}
 }
 //			

@@ -26,23 +26,23 @@ public class Database {
 		chatCount = 0;
 		groupCount = 0;
 
-		User a = new User("adam", "adam", "1234567", UserType.GENERAL);
-		User b = new User("josh", "josh", "1111111", UserType.GENERAL);
+		User a = new User("adam", "adam", "1234567", UserType.GENERAL, UserStatus.OFFLINE);
+		User b = new User("josh", "josh", "1111111", UserType.GENERAL, UserStatus.OFFLINE);
 		users.add(a);
 		users.add(b);
 	}
 
 
 
-	private void createSession(User user) {
-		// Logic to create a session for the user
-		// This might involve generating a session token, storing it in a session management system, etc.
-	}
+//	private void createChatSession(User user, User trgtUser) {
+//		// Logic to create a session for the user
+//		// This might involve generating a session token, storing it in a session management system, etc.
+//	}
 
 	public boolean logout(User user) {
-		for (int i = 0; i < connectedUser.size(); i++) {
-		      if (connectedUser.get(i).getAcctNum().equals(user.getAcctNum())) {
-		    	  connectedUser.remove(i);
+		for (int i = 0; i < connectedUsers.size(); i++) {
+		      if (connectedUsers.get(i).getAcctNum().equals(user.getAcctNum())) {
+		    	  connectedUsers.remove(i);
 		      }
 		}
 		return true;
@@ -50,19 +50,19 @@ public class Database {
 
 	//connected user methods
 	public void addConnectedUser(User user) {
-		connectedUser.add(user);
+		connectedUsers.add(user);
 	}
 
 	public void removeConnectedUser(User user) {
-		for (int i = 0; i < connectedUser.size(); i++) {
-		      if (connectedUser.get(i).getAcctNum().equals(user.getAcctNum())) {
-		    	  connectedUser.remove(i);
+		for (int i = 0; i < connectedUsers.size(); i++) {
+		      if (connectedUsers.get(i).getAcctNum().equals(user.getAcctNum())) {
+		    	  connectedUsers.remove(i);
 		      }
 		}
 	}
 
 	public ArrayList<User> getConnectedUsers() {
-		return connectedUser;
+		return connectedUsers;
 	}
 
 	//general user methods
@@ -94,7 +94,6 @@ public class Database {
 		if (group.isPrivate == true) {
 			for (int i = 0; i < privateGroups.size(); i++) {
 			      if (privateGroups.get(i).getGroupID().equals(group.getGroupID())) {
-			    	  deletedGroups.add(privateGroups.get(i));
 			    	  privateGroups.remove(i);
 			      }
 			}
@@ -102,7 +101,6 @@ public class Database {
 		else {
 			for (int i = 0; i < publicGroups.size(); i++) {
 			      if (publicGroups.get(i).getGroupID().equals(group.getGroupID())) {
-			    	  deletedGroups.add(publicGroups.get(i));
 			    	  publicGroups.remove(i);
 			      }
 			}
@@ -148,9 +146,6 @@ public class Database {
 		return privateGroups;
 	}
 
-	public ArrayList<Group> getDeletedGroups() {
-		return deletedGroups;
-	}
 
 	public void writeToGroup(Group group, Message message) {
 		group.addMessage(message);
@@ -169,6 +164,25 @@ public class Database {
 	public void addChatToList(Chat chat) {
 		chats.add(chat);
 	}
+
+	public UserStatus authenticateUser(User user) {
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUsername().equals(user.getUsername()) &&
+					users.get(i).getPassword().equals(user.getPassword())) {
+				addConnectedUser(user);
+				user.setUserStatus(UserStatus.ONLINE);
+				return user.getUserStatus();
+			}
+		}
+		user.setUserStatus(UserStatus.PROGRESS);
+		return user.getUserStatus();
+	}
+
+	public boolean verify(User user) {
+		//so far only works with general users
+
+	}
+
 
 	/*
 	 * I'm not sure what this method does. Receiver.Chat is a single object, that contains an ArrayList of Message objects. Nabil
