@@ -18,22 +18,20 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		Scanner scanner = new Scanner(System.in);
+		// Username Input
 		System.out.println("Enter username: ");
 		String username = scanner.nextLine();
+		// Password Input
 		System.out.println("Enter password: ");
 		String password = scanner.nextLine();
-
-		User user = new User(username, username, password, UserType.GENERAL, UserStatus.PROGRESS);
-
-		// Construct Packet
-		Packet loginPacket = new Packet();
-		loginPacket.setPacketType(PacketType.REQUEST);
-		loginPacket.setRequestType(RequestType.LOGIN);
-		loginPacket.setUser(user);
+		// Construct New User
+		User newUser = new User(username, username, password, UserType.GENERAL, UserStatus.PROGRESS);
+		// Construct Login Packet
+		Packet loginPacket = new Packet(PacketType.REQUEST, RequestType.LOGIN, newUser);
 
 		Socket socket = new Socket(LOCATION, PORT);
 
-		Client client = new Client(socket, username, loginPacket);
+		Client client = new Client(socket, loginPacket);
 
 		client.listenForMessage();
 		client.sendPacket();

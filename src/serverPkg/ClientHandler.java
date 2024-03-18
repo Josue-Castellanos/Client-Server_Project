@@ -8,15 +8,17 @@ import packetPkg.Packet;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import static java.io.ObjectInputStream.*;
+
 public class ClientHandler implements Runnable {
 
 	public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 	private Socket clientSocket;
+	private Packet packet;
 	private BufferedWriter bufferedWriter;
 	private BufferedReader bufferedReader;
 	private ObjectInputStream inputStream;
-	private Packet packet;
-	private PacketHandler packetHandler = new PacketHandler();
+    private final PacketHandler packetHandler = new PacketHandler();
     private String clientUsername;
    
     
@@ -32,17 +34,9 @@ public class ClientHandler implements Runnable {
 			// Reads Login Packet
 			this.packet = (Packet) inputStream.readObject();
 
-
-			while (packetHandler.receivePacket(packet) == "INVALID") {
-
-			}
-
-
-			this.clientUsername = packet.getUser().username;
-
-
+			this.clientUsername = packet.getUser().getUsername();
 			clientHandlers.add(this);
-			// send this code to packet receiver to add to list once chat is created
+			// send this cod packet receiver to add to list once chat is created
 			// packet.getGroup().userList.add(clientUsername);
 			broadcastMessage("SERVER: " + clientUsername + " has entered the chat!");	
 		}
@@ -57,12 +51,11 @@ public class ClientHandler implements Runnable {
 		
 		while (clientSocket.isConnected()) {
 			try {
-				packet = ObjectInputStream.readObject();
-				messageFromPacket = packet.getMessage().message;
-				messageFromPacket = inputStream.readLine();
+                Packet packetReceived = (Packet) inputStream.readObject();
+				messageFromPacket = packetHandler.receivePacket(packetReceived);
 				broadcastMessage(messageFromPacket);
 			}
-			catch (IOException e) {
+			catch (IOException | ClassNotFoundException e) {
 				closeChat(clientSocket, inputStream, bufferedWriter, bufferedReader);
 				break;
 			}

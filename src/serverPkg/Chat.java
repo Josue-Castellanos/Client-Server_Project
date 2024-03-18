@@ -36,7 +36,7 @@ public class Chat {
         return msgList;
     }
 
-    public Message getMessage(int index) {
+    public Message getMessageObject(int index) {
         return msgList.get(index);
     }
 

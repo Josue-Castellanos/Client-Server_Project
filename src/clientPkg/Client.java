@@ -6,23 +6,21 @@ import java.util.Scanner;
 
 
 import packetPkg.*;
-//import serverPkg.*;
 
 public class Client {
 
-	// driver code
 	private Socket clientSocket;
 	private BufferedReader bufferedReader;
 	private ObjectOutputStream outputStream;
 	private Packet packet;
 	private String username;
 
-	public Client(Socket socket, String username, Packet packet) {
+	public Client(Socket socket, Packet packet) {
 		try {
 			this.clientSocket = socket;
 			this.outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 			this.bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			this.username = username;
+			this.username = packet.getUser().getUsername();
 			this.packet = packet;
 
 		} catch (IOException e) {
@@ -40,7 +38,8 @@ public class Client {
 			while (clientSocket.isConnected()) {
 				String messageToSend = scanner.nextLine();
 
-				// Construct Packet
+				// Construct Message Packet
+				Packet sendPacket = new Packet(Packet(PacketType.REQUEST, RequestType.SEND_MESSAGE_CHAT, User ));
 
 
 				outputStream.writeObject(username + ": " + messageToSend);

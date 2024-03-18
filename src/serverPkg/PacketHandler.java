@@ -105,6 +105,7 @@ public class PacketHandler {
 
     private void handleChatMessagePacket(Packet packet) {
         // Logic to handle chat message packet
+        String messageReceived = packet.getMessage().ge
         comSystem.writeToChat(packet.getChat(), packet.getMessage());
         packet.setStatusType(StatusType.SUCCESS);
         out.writeObject(packet);
