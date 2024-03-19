@@ -5,40 +5,38 @@ import java.io.*;
 //import java.io.ObjectOutputStream;
 //import java.io.OutputStream;
 import packetPkg.Packet;
+import packetPkg.PacketType;
+import packetPkg.RequestType;
+import packetPkg.StatusType;
+
 import java.net.Socket;
 import java.util.ArrayList;
-
-import static java.io.ObjectInputStream.*;
+import java.util.Objects;
 
 public class ClientHandler implements Runnable {
 
 	public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 	private Socket clientSocket;
-	private Packet packet;
-	private BufferedWriter bufferedWriter;
+    private BufferedWriter bufferedWriter;
 	private BufferedReader bufferedReader;
 	private ObjectInputStream inputStream;
-    private final PacketHandler packetHandler = new PacketHandler();
+    private final RequestHandler requestHandler = new RequestHandler();
     private String clientUsername;
-   
-    
+	private Packet packet;
+
+
 	// Constructor
 	public ClientHandler(Socket socket) {
 		
 		try {
 			this.clientSocket = socket;
-			this.inputStream = new ObjectInputStream(clientSocket.getInputStream());
 			this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 			this.bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-			// Reads Login Packet
-			this.packet = (Packet) inputStream.readObject();
-
+			this.inputStream = new ObjectInputStream(clientSocket.getInputStream());
+            this.packet = (Packet) inputStream.readObject();
 			this.clientUsername = packet.getUser().getUsername();
 			clientHandlers.add(this);
-			// send this cod packet receiver to add to list once chat is created
-			// packet.getGroup().userList.add(clientUsername);
-			broadcastMessage("SERVER: " + clientUsername + " has entered the chat!");	
+			broadcastMessage("SERVER: " + clientUsername + " has entered the chat!", packet);
 		}
 		catch (IOException | ClassNotFoundException e) {
 			closeChat(clientSocket, inputStream, bufferedWriter, bufferedReader);
@@ -47,47 +45,60 @@ public class ClientHandler implements Runnable {
 
 	@Override
 	public void run() {
-		String messageFromPacket;
+		String messageFromClient;
+		Packet messagePacket;
+		Message message;
 		
 		while (clientSocket.isConnected()) {
 			try {
-                Packet packetReceived = (Packet) inputStream.readObject();
-				messageFromPacket = packetHandler.receivePacket(packetReceived);
-				broadcastMessage(messageFromPacket);
+				messageFromClient = bufferedReader.readLine();
+				message = new Message(packet.getUser().getAcctNum(), packet.getChat().getChatID(), messageFromClient);
+				messagePacket = new Packet(PacketType.REQUEST, RequestType.SEND_MESSAGE_CHAT,
+						packet.getUser(), packet.getChat(), message);
+				broadcastMessage(messageFromClient, messagePacket);
 			}
-			catch (IOException | ClassNotFoundException e) {
+			catch (IOException e) {
 				closeChat(clientSocket, inputStream, bufferedWriter, bufferedReader);
 				break;
 			}
 		}
 	}
 
-	private void broadcastMessage(String messageToSend) {
-		for(ClientHandler clientHandler: clientHandlers) {
-			try {
-				// If the clients name in the clientHandlers list does not match the
-				// username broadcast the message to that client
-				if(!clientHandler.clientUsername.equals(clientUsername)) {
-					clientHandler.bufferedWriter.write(messageToSend);
-					clientHandler.bufferedWriter.newLine();
-					clientHandler.bufferedWriter.flush();
+	// Send message to chat
+	private void broadcastMessage(String messageToSend, Packet sendPacket) {
+		Packet packetProcessed = requestHandler.receivePacket(new Packet(PacketType.REQUEST, RequestType.SEND_MESSAGE_CHAT,
+				sendPacket.getUser(), sendPacket.getChat(), sendPacket.getMessageObject()));
+
+		if(Objects.equals(packetProcessed.getStatusType().toString(), "SUCCESS")) {
+			for(ClientHandler clientHandler: clientHandlers) {
+				try {
+					// If the clients name in the clientHandlers list does not match the
+					// username broadcast the message to that client
+					if (!clientHandler.clientUsername.equals(clientUsername)) {
+						clientHandler.bufferedWriter.write(messageToSend);
+						clientHandler.bufferedWriter.newLine();
+						clientHandler.bufferedWriter.flush();
+					}
+				} catch (IOException e) {
+					closeChat(clientSocket, inputStream, bufferedWriter, bufferedReader);
 				}
 			}
-			catch(IOException e) {
-				closeChat(clientSocket, inputStream, bufferedWriter, bufferedReader);
-			}
 		}
+
 	}
 	
 	public void removeClientHandler() {
-		clientHandlers.remove(this);
-		broadcastMessage("SERVER: " + clientUsername + " has left the chat!");
+		Packet logoutPacket = requestHandler.receivePacket(new Packet(PacketType.REQUEST, RequestType.LOGOUT, StatusType.PROGRESS, UserStatus.ONLINE,
+				packet.getChat(), packet.getUser(), packet.getLocation(), packet.getPort()));
+		if(Objects.equals(logoutPacket.getUser().getUserStatus().toString(), "OFFLINE")) {
+			clientHandlers.remove(this);
+			broadcastMessage("SERVER: " + clientUsername + " has left the chat!", logoutPacket);
+		}
 	}
 	
 	public void closeChat(Socket socket, ObjectInputStream inputStream, BufferedWriter bufferedWriter, BufferedReader bufferedReader) {
+		removeClientHandler();
 		try {
-			removeClientHandler();
-
 			if(inputStream != null) {
 				inputStream.close();
 			}

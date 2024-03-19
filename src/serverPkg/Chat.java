@@ -14,6 +14,7 @@ public class Chat {
     private final String chatID;
     private int messageCount;   // Tracker of messages
     private String chatName;        // ChatName is the username of the recipient
+    protected int chatCount;
 
     //Constructor
     public Chat(String user) {
@@ -23,6 +24,9 @@ public class Chat {
         this.created = new Date();
         this.chatID = idGenerator();
         this.messageCount = 0;
+        this.chatCount = 1;
+
+        userList.add(user);
     }
 
     public String getChatID() {
@@ -58,23 +62,15 @@ public class Chat {
     public void setChatName(ArrayList<String> userList) {
         chatName = userList.get(1);
     }
+    public int getChatCount() {
+        return this.chatCount;
+    }
 
     //Generates IDs for chats.
     private String idGenerator() {
         // Generate random id, for example 283952-V8M32
         Random rnd = new Random();
         return (100000 + rnd.nextInt(900000)) + "-" + "C";
-    }
-    //Searches for in the list
-    private int findHelper(String userID, ArrayList<String> userList) {
-        for(int i = 0; i < userList.size(); i++) {
-            if (userID == userList.get(i)){
-                //If found, return index
-                return i;
-            }
-        }
-        //If not found, return -1;
-        return -1;
     }
 
 }

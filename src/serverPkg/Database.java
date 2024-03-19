@@ -1,214 +1,229 @@
 package serverPkg;
-import packetPkg.*;
 import java.util.ArrayList;
+import java.util.*;
 
 public class Database {
 
-	private ArrayList<User> users;	// List of all Users
-	private ArrayList<User> connectedUsers;	// List of (ONLINE) Users only
-	private ArrayList<User> disconnectedUsers;	// List of (OFFLINE) Users only
-	protected ArrayList<Chat> chats;	//Holds the list of 1-on-1 chats
-	protected ArrayList<Group> groups;	// List of all Type Groups
-	private ArrayList<Group> publicGroups;	// List of PUBLIC Type Groups only
-	private ArrayList<Group> privateGroups;	// List of PRIVATE Type Groups only
-	//protected ArrayList<Message> msgList;	//Holds the list of messages of Chat/Group
-	protected static int chatCount; // Tracker of chats.
-	protected static int groupCount; 	// Tracker of groups.
+	private static Map<String, User> users = new HashMap<>();  // Map of all Users
+	private static Map<String, User> connectedUsers = new HashMap<>();  // Map of (ONLINE) Users only
+	private static Map<String, User> disconnectedUsers = new HashMap<>();  // Map of (OFFLINE) Users only
+	private static Map<String, Chat> chats = new HashMap<>();  // Holds the map of 1-on-1 chats
+	private static Map<String, Group> groups = new HashMap<>();  // Map of all Type Groups
+	private static Map<String, Group> publicGroups = new HashMap<>();  // Map of PUBLIC Type Groups only
+	private static Map<String, Group> privateGroups = new HashMap<>();  // Map of PRIVATE Type Groups only
+	private static int activeGroups = 0; 	// Tracker of groups.
+	private static int activeChats = 0; 	// Tracker of chats.
+
 
 	public Database() {
-		this.users = new ArrayList<>();
-		this.connectedUsers = new ArrayList<>();
-		this.disconnectedUsers = new ArrayList<>();
-		this.chats = new ArrayList<>();
-		this.groups = new ArrayList<>();
-		this.publicGroups = new ArrayList<>();
-		this.privateGroups = new ArrayList<>();
-		chatCount = 0;
-		groupCount = 0;
+		User a = new User("adam", "a", "111111", UserType.GENERAL, UserStatus.OFFLINE);
+		User b = new User("josh", "b", "222222", UserType.GENERAL, UserStatus.OFFLINE);
+		User c = new User("cash", "c", "333333", UserType.GENERAL, UserStatus.OFFLINE);
+		users.put(a.getAcctNum(), a);
+		users.put(b.getAcctNum(), b);
+		users.put(c.getAcctNum(), c);
 
-		User a = new User("adam", "adam", "1234567", UserType.GENERAL, UserStatus.OFFLINE);
-		User b = new User("josh", "josh", "1111111", UserType.GENERAL, UserStatus.OFFLINE);
-		users.add(a);
-		users.add(b);
 	}
 
-
-
-//	private void createChatSession(User user, User trgtUser) {
-//		// Logic to create a session for the user
-//		// This might involve generating a session token, storing it in a session management system, etc.
-//	}
-
-	public boolean logout(User user) {
-		for (int i = 0; i < connectedUsers.size(); i++) {
-		      if (connectedUsers.get(i).getAcctNum().equals(user.getAcctNum())) {
-		    	  connectedUsers.remove(i);
-		      }
-		}
-		return true;
-	}
-
-	//connected user methods
-	public void addConnectedUser(User user) {
-		connectedUsers.add(user);
-	}
-
-	public void removeConnectedUser(User user) {
-		for (int i = 0; i < connectedUsers.size(); i++) {
-		      if (connectedUsers.get(i).getAcctNum().equals(user.getAcctNum())) {
-		    	  connectedUsers.remove(i);
-		      }
-		}
-	}
-
-	public ArrayList<User> getConnectedUsers() {
-		return connectedUsers;
-	}
-
-	//general user methods
-	public void addGeneralUser(User user) {
-		users.add(user);
-	}
-
-	public void removeGeneralUser(User user) {
-		//no delete account
-	}
-
-	public ArrayList<User> getGeneralUsers() {
-		return generalUser;
-	}
-
-	//group methods
-	public void addGroup(Group group) {
-		if (group.isPrivate == true) {
-			privateGroups.add(group);
-		}
-		else {
-			publicGroups.add(group);
-		}
-	}
-
-	public void removeGroup(Group group) {
-		//checks for private or public then copies group to deleted groups while
-		//removing from visible groups
-		if (group.isPrivate == true) {
-			for (int i = 0; i < privateGroups.size(); i++) {
-			      if (privateGroups.get(i).getGroupID().equals(group.getGroupID())) {
-			    	  privateGroups.remove(i);
-			      }
-			}
-		}
-		else {
-			for (int i = 0; i < publicGroups.size(); i++) {
-			      if (publicGroups.get(i).getGroupID().equals(group.getGroupID())) {
-			    	  publicGroups.remove(i);
-			      }
-			}
-		}
-	}
-
-	public void removeUserFromGroupList(String user) {
-		//
-	}
-
-	public void addUserToGroupList(User user) {
-		//
-	}
-
-	//Adds a user to the list
-	public void addUser(String userID) {
-		int index = findHelper(userID, userList);
-		if (index == -1) {
-			userList.add(userID);
-			Collections.sort(userList);
-		}
-		else {
-			System.out.println("\nUser " + userID + " is already a member. \n");
-		}
-	}
-
-	//Removes a user from the list
-	public void removeUser(String userID) {
-		int index = findHelper(userID, userList);
-		if (index != -1) {
-			userList.remove(userID);
-		}
-		else {
-			System.out.println("\nUser " + userID + " is already a member. \n");
-		}
-	}
-
-	public ArrayList<Group> getPublicGroups() {
+	/* ================= GETTERS =====================*/
+	public Map<String, Group> getPublicGroups() {
 		return publicGroups;
 	}
 
-	public ArrayList<Group> getPrivateGroups() {
+	public Map<String, Group> getPrivateGroups() {
 		return privateGroups;
 	}
 
-
-	public void writeToGroup(Group group, Message message) {
-		group.addMessage(message);
+	public Map<String, User> getGeneralUsers() {
+		return users;
 	}
 
-	public Packet readGroup(Group group) {
-		Packet packet = new Packet(PacketType.REQUEST, RequestType.RECEIVE_MESSAGE_GROUP, group);
-		return packet;
+	public Map<String, User> getConnectedUsers() {
+		return connectedUsers;
 	}
 
-	public void addGroupToList(String user, Group group) {
-		group.addUser(user);
+	public Map<String, User> getDisconnectedUsers() {
+		return disconnectedUsers;
 	}
 
-	//chat methods
-	public void addChatToList(Chat chat) {
-		chats.add(chat);
+	public Map<String, Chat> getChats() {
+		return chats;
 	}
 
-	public UserStatus authenticateUser(User user) {
-		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getUsername().equals(user.getUsername()) &&
-					users.get(i).getPassword().equals(user.getPassword())) {
-				addConnectedUser(user);
-				user.setUserStatus(UserStatus.ONLINE);
-				return user.getUserStatus();
-			}
-		}
-		user.setUserStatus(UserStatus.PROGRESS);
-		return user.getUserStatus();
+	public Map<String, Group> getGroups() {
+		return groups;
 	}
 
-	public boolean verify(User user) {
-		//so far only works with general users
+	/* =================== MUTATORS ======================*/
 
-	}
+	public void removeConnectedUserFromList(User user) {
+		if (getConnectedUsers().containsKey(user.getAcctNum())) {
+			getConnectedUsers().remove(user.getAcctNum());
+			getDisconnectedUsers().put(user.getAcctNum(), user);
 
-
-	/*
-	 * I'm not sure what this method does. Receiver.Chat is a single object, that contains an ArrayList of Message objects. Nabil
-	 */
-	public void writeToChat(Chat chat, Message message) {
-		for (int i = 0; i < chats.size(); i++) {
-			if (chat.getChatID().equals(chat.getChatID())) {
-				chat.addMessage(message);
-			}
-			else { //first message
-				//Receiver.Chat newChat = new Receiver.Chat(ArrayList<User> userList); // needs work
-				//addChat(newChat);
-			}
+		} else {
+			System.out.println("\nUser " + user.getAcctNum() + " is not connected.\n");
 		}
 	}
 
-	public Packet readChat(Chat chat) {
-		Packet packet = new Packet(PacketType.REQUEST, RequestType.RECEIVE_MESSAGE_CHAT, chat);
-		return packet;
+	public void addConnectedUserToList(User user) {
+		if (!getConnectedUsers().containsKey(user.getAcctNum())) {
+			getConnectedUsers().put(user.getAcctNum(), user);
+		} else {
+			System.out.println("\nUser " + user.getAcctNum() + " is already connected.\n");
+		}
 	}
 
-	//Add to block list
-	public Packet addBlockList(User user, User blocked) {
-		user.addToBlockList(blocked.getAcctNum());
-		Packet packet = new Packet(PacketType.REQUEST, RequestType.BLOCK_USER, user);
-		return packet;
+	public void addUserToUserList(User user) {
+		if (!getGeneralUsers().containsKey(user.getAcctNum())) {
+			getGeneralUsers().put(user.getAcctNum(), user);
+		} else {
+			System.out.println("\nUser " + user.getAcctNum() + " already exists. \n");
+		}
 	}
 
+	public void removeUserFromUserList(String userID) {
+		if (getGeneralUsers().containsKey(userID)) {
+			getGeneralUsers().remove(userID);
+		} else {
+			System.out.println("\nUser " + userID + " is not found. \n");
+		}
+	}
+
+	public void removeUserFromGroup(String userID, String groupID) {
+		// check if group exists
+		if(getGroups().containsKey(groupID)) {
+			Group group = getGroups().get(groupID);
+			ArrayList<String> list = group.getUserList();
+			int groupCount = group.getGroupCount();
+
+			// Remove userId if listed
+			if (list.contains(userID)) {
+				list.remove(userID);
+				groupCount--;
+				// Remove userID from private/public groups
+				if (group.getPrivacy() ) {
+					getPrivateGroups().get(groupID).getUserList().remove(userID);
+
+				} else {
+					getPublicGroups().get(groupID).getUserList().remove(userID);
+				}
+				// Remove group if it becomes empty after removing the user.
+				if (groupCount == 0) {
+					removeGroupFromGroupList(group);
+				}
+			}
+			else {
+				System.out.println("\nUser " + userID + " is not in group.\n");
+			}
+		}
+		else {
+			System.out.println("\nGroup " + groupID + " not found.\n");
+		}
+	}
+
+	public void addUserToGroup(String userID, String groupID) {
+		if(getGroups().containsKey(groupID)) {
+			Group group = getGroups().get(groupID);
+			ArrayList<String> list = group.getUserList();
+			int groupCount = group.getGroupCount();
+
+			if (!list.contains(userID)) {
+				list.add(userID);
+				groupCount++;
+				// Add userID to private/public groups
+				if (group.getPrivacy() ) {
+					getPrivateGroups().get(groupID).getUserList().add(userID);
+
+				} else {
+					getPublicGroups().get(groupID).getUserList().add(userID);
+				}
+			}
+			else {
+				System.out.println("\nUser " + userID + " already in group.\n");
+			}
+		}
+		else {
+			System.out.println("\nGroup " + groupID + " not found.\n");
+		}
+	}
+
+	public void removeUserFromChat(String userID, String chatID) {
+		// check if chat exists
+		if(getChats().containsKey(chatID)) {
+			Chat chat = getChats().get(chatID);
+			ArrayList<String> list = chat.getUserList();
+			int chatCount = chat.getChatCount();
+
+			// Remove userId if listed
+			if (list.contains(userID)) {
+				list.remove(userID);
+				chatCount--;
+				// Remove group if it becomes empty after removing the user.
+				if (chatCount == 1) {
+					removeChatFromChatList(chat);
+				}
+			}
+			else {
+				System.out.println("\nUser " + userID + " is not in chat.\n");
+			}
+		}
+		else {
+			System.out.println("\nChat " + chatID + " not found.\n");
+		}
+	}
+
+	public void addUserToChat(String userID, String chatID) {
+		if(getChats().containsKey(chatID)) {
+			Chat chat = getChats().get(chatID);
+			ArrayList<String> list = chat.getUserList();
+			int chatCount = chat.getChatCount();
+
+			if (!list.contains(userID)) {
+				list.add(userID);
+				chatCount++;
+			}
+			else {
+				System.out.println("\nUser " + userID + " already in chat.\n");
+			}
+		}
+		else {
+			System.out.println("\nChat " + chatID + " not found.\n");
+		}
+	}
+
+	// Group methods
+	public void addGroupToGroupList(Group group) {
+		getGroups().put(group.getGroupID(), group);
+		if (group.getPrivacy()) {
+			getPrivateGroups().put(group.getGroupID(), group);
+		} else {
+			getPublicGroups().put(group.getGroupID(), group);
+		}
+	}
+
+	public void removeGroupFromGroupList(Group group) {
+		getGroups().remove(group.getGroupID());
+		if (group.getPrivacy()) {
+			getPrivateGroups().remove(group.getGroupID(), group);
+		} else {
+			getPublicGroups().remove(group.getGroupID(), group);
+		}
+	}
+
+	public void addChatToChatList(Chat chat) {
+		if (!getChats().containsKey(chat.getChatID())) {
+			getChats().put(chat.getChatID(), chat);
+		} else {
+			System.out.println("\nChat " + chat.getChatID() + " already exists. \n");
+		}
+	}
+
+	public void removeChatFromChatList(Chat chat) {
+		if (getChats().containsKey(chat.getChatID())) {
+			getChats().remove(chat.getChatID(), chat);
+		} else {
+			System.out.println("\nChat " + chat.getChatID() + " does not exists. \n");
+		}
+	}
 }

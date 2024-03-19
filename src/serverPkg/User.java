@@ -4,6 +4,7 @@ import packetPkg.StatusType;
 
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.Random;
 
 public class User implements Serializable {
 
@@ -30,21 +31,8 @@ public class User implements Serializable {
         this.groupList = new ArrayList<String>();
         this.chatList = new ArrayList<String>();
         this.blockList = new ArrayList<String>();
+        this.acctNum = idGenerator();
     }
-//    //Copy constructor
-//    public User(User newUser) {
-//    	this.displayName = newUser.displayName;
-//        this.username = newUser.getUsername();
-//        this.password = newUser.getPassword();
-//        this.userStatus = userStatus;
-//
-//        this.status = newUser.getStatus();
-//        this.acctNum = newUser.getAcctNum();
-//        this.groupList = newUser.groupList;
-//        this.chatList = newUser.chatList;
-//        this.blockList = newUser.blockList;
-//        this.userType = newUser.getUserType();
-//    }
 
     public String getDisplayName() {
         return displayName;
@@ -114,65 +102,13 @@ public class User implements Serializable {
     public void setBlockList(ArrayList<String> newBlock) {
         this.blockList= newBlock;
     }
-    
-    /**********************	Mutators	*********************/
-    public void addToGroupList(String newGroup) {
-    	groupList.add(newGroup);
-    }
-    
-    public void addToChatList(String newChat) {
-    	chatList.add(newChat);
-    }
-    
-    public void removeFromGroupList(String trgtGroup) {
-    	groupList.remove(trgtGroup);
-    }
-    
-    public void removeFromChatList(String trgtChat) {
-    	chatList.remove(trgtChat);
-    }
-    public void addToBlockList(String newUser) {
-        blockList.add(newUser);
+
+    private String idGenerator() {
+        // Generate random id, for example 283952-V8M32
+        Random rnd = new Random();
+        return (100000 + rnd.nextInt(900000)) + "-" + "U";
     }
 }
-//    public class GeneralUser extends User {
-//
-//    	  public GeneralUser(String displayName, String username, String password, UserType userType) {
-//    		  super(displayName,username, password, userType);
-//    		  this.status = true;
-//    	    }
-//		/* public void reportIT(String acctNum) {
-//		        // implementation to report an issue to the IT department
-//		    }*/
-//    }
-//    public class ITUser extends User {
-//
-//    	  public ITUser(String displayName, String username, String password, UserType userType) {
-//    		  super(displayName,username, password, userType);
-//    		  this.status = true;
-//    	    }
-//    	/*
-//    	public void kick(User user) {
-//            // implementation to remove user from chat or group
-//        }
-//
-//        public void log(String username) {
-//            // implementation to log activity related to a specific user
-//        }
-//
-//        public void log(Group group) {
-//            // implementation to log activity related to a specific group
-//        }
-//
-//        public void log(Chat chat) {
-//            // implementation to log activity related to a specific chat
-//        }
-//
-//        public void deleteGroup(Group group) {
-//            // implementation to delete a group
-//        }*/
-//
-//    }
 
 
 

@@ -2,13 +2,12 @@ package packetPkg;
 
 public enum RequestType {
 	
-//	USER_DATA,				//Send User's Data
-//	GROUP_LIST,				//Send a List of Groups
-//	CHAT_LIST,				//Send a List of Chats
-//	INVITE_LIST,			//Send a List of Group Invitations
-//	RECEIVE_INVITE,
-//	SEND_INVITE,
-
+	USER_DATA,				//Send User's Data
+	REQUEST_GROUP_LIST,				//Send a List of Groups
+	REQUEST_CHAT_LIST,				//Send a List of Chats
+	REQUEST_INVITE_LIST,			//Send a List of Group Invitations
+	RECEIVE_INVITE,
+	SEND_INVITE,
 	LOGIN,   //Login Request
 	LOGOUT,  //Logout Request
 	SEND_MESSAGE_GROUP,    //Send Message Request

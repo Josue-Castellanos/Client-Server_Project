@@ -6,15 +6,15 @@ import java.util.Random;
 
 public class Group {
 
-    protected ArrayList<String> userList;	//Holds the list of users
+    protected ArrayList<String> userList;	//Holds the list of userIDs
     protected ArrayList<Message> msgList;	//Holds the list of message objects
     protected Date created;		//Date the Receiver was created
     protected String createdByUser; //Name of user who created the Receiver
-    private int groupCount;
-    private int groupMessages;
+    protected int groupCount;
+    protected int groupMessages;
     private final String groupID;		//Uniquely Generated groupID
     private final String groupName;		//Name for the Group. Doesn't have to be unique at the moment. Can implement uniqueness later if needed.
-    public boolean isPrivate;		//Indicates whether the group is designated private or public. If private, should not be accessible by users not on the userList.
+    protected boolean isPrivate;		//Indicates whether the group is designated private or public. If private, should not be accessible by users not on the userList.
 
     //Group Constructor
     public Group(String user, boolean privacy, String newGroupName) {
@@ -38,11 +38,11 @@ public class Group {
     }
 
 
-    public ArrayList<Message> getMsgList() {
+    public ArrayList<Message> getMessageList() {
         return msgList;
     }
 
-    public Message getMessage(int index) {
+    public Message getMessageObject(int index) {
         return msgList.get(index);
     }
 
@@ -62,6 +62,14 @@ public class Group {
         return created.toString();
     }
 
+    public boolean getPrivacy() {
+        return isPrivate;
+    }
+    public int getGroupCount() {
+        return groupCount;
+    }
+
+
     //Generates IDs for groups.
     private String idGenerator() {
         // Generate random id, for example 283952-V8M32
@@ -69,16 +77,5 @@ public class Group {
         return (100000 + rnd.nextInt(900000)) + "-" + "G";
     }
 
-    //Searches for in the list
-    private int findHelper(String userID, ArrayList<String> userList) {
-        for(int i = 0; i < userList.size(); i++) {
-            if (userID == userList.get(i)){
-                //If found, return index
-                return i;
-            }
-        }
-        //If not found, return -1;
-        return -1;
-    }
 
 }

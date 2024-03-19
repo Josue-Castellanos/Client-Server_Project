@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class Message implements Serializable {
+public class Message {
 	protected String fromAcctNum;
     protected String destinationID;
     protected String message;
@@ -13,16 +13,15 @@ public class Message implements Serializable {
 
     //Default Constructor
     public Message() {
-    	this(null, null, null, null);
+    	this(null, null, null);
     	this.date = null;
     }
     
     // constructor
-    public Message(String fromAcctNum, String destinationID, String message, MsgType msgType){
+    public Message(String fromAcctNum, String destinationID, String message){
         this.fromAcctNum = fromAcctNum;
         this.destinationID = destinationID;
         this.date = new Date();
-        this.msgType = msgType;
         this.message = message;
     }
 
@@ -40,14 +39,11 @@ public class Message implements Serializable {
     	return msgType;
     }
     
-    public String getMessage() {
+    public String getString() {
     	return message;
     }
 
     public Date getDate() {
     	return date;
     }
-
-    /**************** Setters ***********************/
-
 }

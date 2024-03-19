@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Packet implements Serializable{
 	protected PacketType type;
+	protected UserStatus userstatus;
 	protected RequestType request;
 	protected StatusType status;
 	protected Message message;
@@ -46,10 +47,15 @@ public class Packet implements Serializable{
 	}
 
 	//Login and Logout Constructor
-	public Packet(PacketType packet, RequestType request, User newUser){
+	public Packet(PacketType packet, RequestType request, StatusType status, UserStatus newStatus, Chat newChat, User newUser, String newLocation, Integer newPort){
 		this.setPacketType(packet);
 		this.setRequestType(request);
+		this.setStatusType(status);
+		this.setUserStatus(newStatus);
+		this.setChat(newChat);
 		this.setUser(newUser);
+		this.setLocation(newLocation);
+		this.setPort(newPort);
 	}
 
 	//SEND_MESSAGE_GROUP Constructor
@@ -130,7 +136,7 @@ public class Packet implements Serializable{
 	}
 
 	// Get Message object containing the string
-	public Message getMessage() {
+	public Message getMessageObject() {
 		return message;
 	}
 
@@ -190,6 +196,10 @@ public class Packet implements Serializable{
 	public void setStatusType(StatusType status) {
 		this.status = status;
 	}
+	public void setUserStatus(UserStatus userstatus) {
+		this.userstatus = userstatus;
+	}
+
 	public void setMessage(Message message) {
 		this.message = message;
 	}
