@@ -33,6 +33,7 @@ public class Main {
 		Chat newChat = new Chat(newUser.getAcctNum());
 		// Construct Login Packet
 		Packet loginPacket = new Packet(PacketType.REQUEST, RequestType.LOGIN, StatusType.PROGRESS, UserStatus.OFFLINE, newChat, newUser, LOCATION, PORT);
+
 		// Construct Socket
 		Socket socket = new Socket(LOCATION, PORT);
 		//Construct Client

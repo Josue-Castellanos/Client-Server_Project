@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class Message {
+public class Message implements Serializable{
 	protected String fromAcctNum;
     protected String destinationID;
     protected String message;

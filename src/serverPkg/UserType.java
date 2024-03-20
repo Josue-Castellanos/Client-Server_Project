@@ -2,5 +2,7 @@ package serverPkg;
 
 public enum UserType {
 	GENERAL, //General User
-	IT 		 //IT User
+	ADMIN,	// Admin User
+	MODERATOR,	// Group Mod
+	IT, 		 //IT User
 }

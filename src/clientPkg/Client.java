@@ -7,57 +7,59 @@ import java.util.Scanner;
 
 import packetPkg.*;
 import serverPkg.Message;
+import serverPkg.User;
 
 public class Client {
 
 	private Socket clientSocket;
 	private BufferedReader bufferedReader;
-	private BufferedWriter bufferedWriter;
 	private ObjectOutputStream outputStream;
-	private Packet packet;
+	private Packet loginPacket;
 	private String username;
+
 
 	public Client(Socket socket, Packet packet) {
 		try {
 			this.clientSocket = socket;
-			this.outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+			this.outputStream = new ObjectOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
 			this.bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			this.username = packet.getUser().getUsername();
-			this.packet = packet;
+			this.loginPacket = packet;
 
 		} catch (IOException e) {
 			closeChat(clientSocket, bufferedReader, outputStream);
 		}
 	}
 
+	// Method to send a Packet object to the server
+	private void sendPacket(Packet packet) throws IOException {
+		outputStream.writeObject(packet);
+		outputStream.flush();
+	}
+
 	public void sendMessage() {
 		try {
-			// Send Login Packet from Main
-			outputStream.writeObject(packet);
-			outputStream.flush();
+			// Send login packet
+			sendPacket(loginPacket);
 
-			// if Login is successful....
+			// Start listening for messages from the server
+			//listenForMessage();
+
 			Scanner scanner = new Scanner(System.in);
 			while (clientSocket.isConnected() ) {
-				String messageToSend = scanner.nextLine();
+				String messageToSend = username + ": " + scanner.nextLine();
 				// Construct Message
-				Message message = new Message(packet.getUser().getAcctNum(), packet.getChat().getChatID(), messageToSend);
+				Message message = new Message(loginPacket.getUser().getAcctNum(), loginPacket.getChat().getChatID(), messageToSend);
 				// Construct Message Packet
-				Packet messagePacket = new Packet(PacketType.REQUEST, RequestType.SEND_MESSAGE_CHAT, packet.getUser(), packet.getChat(), message);
+				Packet messagePacket = new Packet(PacketType.REQUEST, RequestType.SEND_MESSAGE_CHAT, StatusType.PROGRESS, loginPacket.getUser(), loginPacket.getChat(), message);
 
-				outputStream.writeObject(messagePacket);
-				outputStream.flush();
-
-				bufferedWriter.write(username + "; " + messageToSend);
-				bufferedWriter.newLine();
-				bufferedWriter.flush();
+				sendPacket(messagePacket);
 			}
 		}
 		catch (IOException e) {
 			closeChat(clientSocket, bufferedReader, outputStream);
 		}
 	}
-
 
 	public void listenForMessage() {
 		// Replaced new Runnable() with lambda ->

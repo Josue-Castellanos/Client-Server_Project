@@ -1,10 +1,11 @@
 package serverPkg;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-public class Group {
+public class Group implements Serializable {
 
     protected ArrayList<String> userList;	//Holds the list of userIDs
     protected ArrayList<Message> msgList;	//Holds the list of message objects

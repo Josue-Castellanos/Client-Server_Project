@@ -18,7 +18,6 @@ public class Server {
 		try {
 			// Listen for connections (clients to connect) on port 1234
 			while (!serverSocket.isClosed()) {
-
 				// Will be closed in the ClientHandler
 				Socket socket = serverSocket.accept();
 				System.out.println("[SERVER] Client has connected!");

@@ -6,66 +6,67 @@ import java.util.ArrayList;
 
 public class RequestHandler {
     private Database db;
-    private Packet processedPacket;
+    private String processedPacket;
 
-    public Packet receivePacket(Packet packet) {
+    public String receivePacket(Packet packet) {
         switch (packet.getRequestType()) {
             case SEND_MESSAGE_GROUP:
-                processedPacket = handleGroupMessagePacket(packet);
+                processedPacket = handleGroupMessagePacket(packet).getStatusType().toString();
                 break;
             case SEND_MESSAGE_CHAT:
-                processedPacket = handleChatMessagePacket(packet);
+                processedPacket = handleChatMessagePacket(packet).getStatusType().toString();
                 break;
             case RECEIVE_MESSAGE_GROUP:
-                processedPacket = handleReceivedGroupMessagePacket(packet);
+                processedPacket = handleReceivedGroupMessagePacket(packet).getStatusType().toString();
                 break;
             case RECEIVE_MESSAGE_CHAT:
-                processedPacket = handleReceivedChatMessagePacket(packet);
+                processedPacket = handleReceivedChatMessagePacket(packet).getStatusType().toString();
                 break;
             case CREATE_GROUP:
-                processedPacket = handleCreateGroupPacket(packet);
+                processedPacket = handleCreateGroupPacket(packet).getStatusType().toString();
                 break;
             case CREATE_CHAT:
-                processedPacket = handleCreateChatPacket(packet);
+                processedPacket = handleCreateChatPacket(packet).getStatusType().toString();
                 break;
             case JOIN_GROUP:
-                processedPacket = handleJoinGroupPacket(packet);
+                processedPacket = handleJoinGroupPacket(packet).getStatusType().toString();
                 break;
             case LEAVE_GROUP:
-                processedPacket = handleLeaveGroupPacket(packet);
+                processedPacket = handleLeaveGroupPacket(packet).getStatusType().toString();
                 break;
             case LOGIN:
-                processedPacket = handleLoginPacket(packet);
+                processedPacket = handleLoginPacket(packet).getStatusType().toString();
                 break;
             case LOGOUT:
-                processedPacket = handleLogoutPacket(packet);
+                processedPacket = handleLogoutPacket(packet).getStatusType().toString();
                 break;
             case RECEIVE_INVITE:
-                //processedPacket = handleReceivedInviteListPacket(packet);
+                //processedPacket = handleReceivedInviteListPacket(packet).getStatusType().toString();
                 break;
             case KICK_USER:
-                //processedPacket = handleKickUserPacket(packet);
+                //processedPacket = handleKickUserPacket(packet).getStatusType().toString();
                 break;
             case REPORT_USER:
-                //processedPacket = handleReportUserPacket(packet);
+                //processedPacket = handleReportUserPacket(packet).getStatusType().toString();
                 break;
             case BLOCK_USER:
-                //processedPacket = handleBlockUserPacket(packet);
+                //processedPacket = handleBlockUserPacket(packet).getStatusType().toString();
                 break;
             case SEND_INVITE:
-                //processedPacket = handleBlockListRequestPacket(packet);
+                //processedPacket = handleBlockListRequestPacket(packet).getStatusType().toString();
                 break;
             case REQUEST_INVITE_LIST:
-                //processedPacket = handleInviteListRequestPacket(packet);
+                //processedPacket = handleInviteListRequestPacket(packet).getStatusType().toString();
                 break;
             case REQUEST_GROUP_LIST:
-                //processedPacket = handleGroupListRequestPacket(packet);
+                //processedPacket = handleGroupListRequestPacket(packet).getStatusType().toString();
                 break;
             case REQUEST_CHAT_LIST:
-                //processedPacket = handleChatListRequestPacket(packet);
+                //processedPacket = handleChatListRequestPacket(packet).getStatusType().toString();
                 break;
             default:
-                processedPacket.setStatusType(StatusType.FAIL);
+                packet.setStatusType(StatusType.FAIL);
+                processedPacket = packet.getStatusType().toString();
                 break;
         }
         return processedPacket;
@@ -75,11 +76,9 @@ public class RequestHandler {
     private Packet handleLoginPacket(Packet packet) {
         // If authentication was successful:
         // User will have User Status ONLINE
-
         if (authenticateUser(packet.getUser())) {
             // Set Packet Status to SUCCESSFUL request
-            Packet processedPacket = new Packet();
-            processedPacket.setStatusType(StatusType.SUCCESS);
+            packet.setStatusType(StatusType.SUCCESS);
         }
         // Packet Status FAIL when login authentication failed.
         else {
@@ -154,17 +153,17 @@ public class RequestHandler {
 
    /*============== SUPPORTING METHODS ===================*/
    public boolean authenticateUser(User user) {
-       for (int i = 0; i < db.getGeneralUsers().size(); i++) {
-           if (db.getGeneralUsers().get(i).getUsername().equals(user.getUsername()) &&
-                   db.getGeneralUsers().get(i).getPassword().equals(user.getPassword())) {
-               db.addConnectedUserToList(user);
-               user.setUserStatus(UserStatus.ONLINE);
+       for (User existingUser : db.getGeneralUsers().values()) {
+           if (existingUser.getUsername().equals(user.getUsername()) &&
+                   existingUser.getPassword().equals(user.getPassword())) {
+               db.addConnectedUserToList(existingUser);
+               existingUser.setUserStatus(UserStatus.ONLINE);
                return true;
            }
        }
-       user.setUserStatus(UserStatus.PROGRESS);
-       return false;
+       return false; // User not found or password incorrect
    }
+
     public boolean logout(User user) {
         for (int i = 0; i < db.getConnectedUsers().size(); i++) {
             if (db.getConnectedUsers().get(i).getAcctNum().equals(user.getAcctNum())) {

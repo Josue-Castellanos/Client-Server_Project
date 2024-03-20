@@ -16,12 +16,16 @@ public class Database {
 
 
 	public Database() {
-		User a = new User("adam", "a", "111111", UserType.GENERAL, UserStatus.OFFLINE);
-		User b = new User("josh", "b", "222222", UserType.GENERAL, UserStatus.OFFLINE);
-		User c = new User("cash", "c", "333333", UserType.GENERAL, UserStatus.OFFLINE);
+		User a = new User("adam", "a", "1", UserType.GENERAL, UserStatus.OFFLINE);
+		User b = new User("josh", "b", "2", UserType.GENERAL, UserStatus.OFFLINE);
+		User c = new User("cash", "c", "3", UserType.GENERAL, UserStatus.OFFLINE);
 		users.put(a.getAcctNum(), a);
 		users.put(b.getAcctNum(), b);
 		users.put(c.getAcctNum(), c);
+
+		disconnectedUsers.put(a.getAcctNum(), a);
+		disconnectedUsers.put(b.getAcctNum(), b);
+		disconnectedUsers.put(c.getAcctNum(), c);
 
 	}
 

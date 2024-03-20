@@ -83,9 +83,10 @@ public class Packet implements Serializable{
 	}
 
 	//SEND_MESSAGE_CHAT Constructor
-	public Packet(PacketType packet, RequestType request, User fromUser, Chat trgtChat, Message newMessage) {
+	public Packet(PacketType packet, RequestType request, StatusType status, User fromUser, Chat trgtChat, Message newMessage) {
 		this.setPacketType(packet);
 		this.setRequestType(request);
+		this.setStatusType(status);
 		this.setUser(fromUser);
 		this.setChat(trgtChat);
 		this.setMessage(newMessage);

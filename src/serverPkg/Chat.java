@@ -1,10 +1,11 @@
 package serverPkg;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-public class Chat {
+public class Chat implements Serializable {
     //private static final int MAX_USERS = 2;
     //protected String[] users = new String[MAX_USERS];
     protected ArrayList<String> userList;	//Holds the list of users names or users id

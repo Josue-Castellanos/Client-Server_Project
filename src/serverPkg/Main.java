@@ -7,8 +7,6 @@ public class Main {
 	private static final int PORT = 1234;
 
 	public static void main(String[] args) throws IOException {
-		//ComSystem comSystem = new ComSystem();
-
 		// server is listening on port 1234
 		ServerSocket listener = new ServerSocket(PORT);
 
