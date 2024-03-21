@@ -9,6 +9,7 @@ public class Server {
 	
 	private final ServerSocket serverSocket;
 
+	// Constructor
 	public Server(ServerSocket serverSocket) {
 		this.serverSocket = serverSocket;
 	}
@@ -19,10 +20,10 @@ public class Server {
 			// Listen for connections (clients to connect) on port 1234
 			while (!serverSocket.isClosed()) {
 				// Will be closed in the ClientHandler
-				Socket socket = serverSocket.accept();
-				System.out.println("[SERVER] Client has connected!");
+				Socket client = serverSocket.accept();
+				System.out.println("[SERVER] Client " + client.getInetAddress().getHostAddress() + " connected waiting for authentication...");
 				// create a new thread object
-				ClientHandler clientHandler = new ClientHandler(socket);
+				ClientHandler clientHandler = new ClientHandler(client);
 				// This thread will handle the client separately
 				Thread thread = new Thread(clientHandler);
 				// The start method begins execution of a thread.
@@ -38,14 +39,14 @@ public class Server {
 
 	// Close the server socket gracefully
 	public void closeServerSocket() {
-		try {
-			if (serverSocket != null) {
+		if (serverSocket != null && !serverSocket.isClosed()) {
+			try {
 				serverSocket.close();
 				System.out.println("[SERVER] Client has disconnected!");
 			}
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
+			catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

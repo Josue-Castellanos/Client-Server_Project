@@ -1,96 +1,96 @@
 package serverPkg;
 
 import packetPkg.*;
-
 import java.util.ArrayList;
 
 public class RequestHandler {
-    private Database db;
-    private String processedPacket;
+    private Database db = new Database();
+    private Packet processedPacket;
 
-    public String receivePacket(Packet packet) {
+    public Packet receivePacket(Packet packet) {
         switch (packet.getRequestType()) {
             case SEND_MESSAGE_GROUP:
-                processedPacket = handleGroupMessagePacket(packet).getStatusType().toString();
+                processedPacket = handleGroupMessagePacket(packet);
                 break;
             case SEND_MESSAGE_CHAT:
-                processedPacket = handleChatMessagePacket(packet).getStatusType().toString();
+                processedPacket = handleChatMessagePacket(packet);
                 break;
             case RECEIVE_MESSAGE_GROUP:
-                processedPacket = handleReceivedGroupMessagePacket(packet).getStatusType().toString();
+                processedPacket = handleReceivedGroupMessagePacket(packet);
                 break;
             case RECEIVE_MESSAGE_CHAT:
-                processedPacket = handleReceivedChatMessagePacket(packet).getStatusType().toString();
+                processedPacket = handleReceivedChatMessagePacket(packet);
                 break;
             case CREATE_GROUP:
-                processedPacket = handleCreateGroupPacket(packet).getStatusType().toString();
+                processedPacket = handleCreateGroupPacket(packet);
                 break;
             case CREATE_CHAT:
-                processedPacket = handleCreateChatPacket(packet).getStatusType().toString();
+                processedPacket = handleCreateChatPacket(packet);
                 break;
             case JOIN_GROUP:
-                processedPacket = handleJoinGroupPacket(packet).getStatusType().toString();
+                processedPacket = handleJoinGroupPacket(packet);
                 break;
             case LEAVE_GROUP:
-                processedPacket = handleLeaveGroupPacket(packet).getStatusType().toString();
+                processedPacket = handleLeaveGroupPacket(packet);
                 break;
             case LOGIN:
-                processedPacket = handleLoginPacket(packet).getStatusType().toString();
+                processedPacket = handleLoginPacket(packet);
                 break;
             case LOGOUT:
-                processedPacket = handleLogoutPacket(packet).getStatusType().toString();
+                processedPacket = handleLogoutPacket(packet);
                 break;
             case RECEIVE_INVITE:
-                //processedPacket = handleReceivedInviteListPacket(packet).getStatusType().toString();
+                //processedPacket = handleReceivedInviteListPacket(packet).getStatusType();
                 break;
             case KICK_USER:
-                //processedPacket = handleKickUserPacket(packet).getStatusType().toString();
+                //processedPacket = handleKickUserPacket(packet).getStatusType();
                 break;
             case REPORT_USER:
-                //processedPacket = handleReportUserPacket(packet).getStatusType().toString();
+                //processedPacket = handleReportUserPacket(packet).getStatusType();
                 break;
             case BLOCK_USER:
-                //processedPacket = handleBlockUserPacket(packet).getStatusType().toString();
+                //processedPacket = handleBlockUserPacket(packet).getStatusType();
                 break;
             case SEND_INVITE:
-                //processedPacket = handleBlockListRequestPacket(packet).getStatusType().toString();
+                //processedPacket = handleBlockListRequestPacket(packet).getStatusType();
                 break;
             case REQUEST_INVITE_LIST:
-                //processedPacket = handleInviteListRequestPacket(packet).getStatusType().toString();
+                //processedPacket = handleInviteListRequestPacket(packet).getStatusType();
                 break;
             case REQUEST_GROUP_LIST:
-                //processedPacket = handleGroupListRequestPacket(packet).getStatusType().toString();
+                //processedPacket = handleGroupListRequestPacket(packet).getStatusType();
                 break;
             case REQUEST_CHAT_LIST:
-                //processedPacket = handleChatListRequestPacket(packet).getStatusType().toString();
+                //processedPacket = handleChatListRequestPacket(packet).getStatusType();
                 break;
             default:
                 packet.setStatusType(StatusType.FAIL);
-                processedPacket = packet.getStatusType().toString();
+                processedPacket = packet;
                 break;
         }
         return processedPacket;
     }
 
-    /* ==============HANDLING METHODS ================== */
+    /* ============== HANDLING METHODS ================== */
     private Packet handleLoginPacket(Packet packet) {
         // If authentication was successful:
         // User will have User Status ONLINE
         if (authenticateUser(packet.getUser())) {
             // Set Packet Status to SUCCESSFUL request
             packet.setStatusType(StatusType.SUCCESS);
+            packet.getUser().setUserStatus(UserStatus.ONLINE);
         }
         // Packet Status FAIL when login authentication failed.
         else {
             packet.setStatusType(StatusType.FAIL);
+            packet.getUser().setUserStatus(UserStatus.OFFLINE);
         }
         return packet;
     }
 
     private Packet handleLogoutPacket(Packet packet) {
         // Logic to handle logout packet
-        boolean success = logout(packet.getUser());
-        if (success) {
+        if (logout(packet.getUser())) {
             packet.setStatusType(StatusType.SUCCESS);
         } else {
             packet.setStatusType(StatusType.FAIL);
@@ -152,40 +152,41 @@ public class RequestHandler {
 
 
    /*============== SUPPORTING METHODS ===================*/
-   public boolean authenticateUser(User user) {
+   private boolean authenticateUser(User user) {
        for (User existingUser : db.getGeneralUsers().values()) {
            if (existingUser.getUsername().equals(user.getUsername()) &&
                    existingUser.getPassword().equals(user.getPassword())) {
                db.addConnectedUserToList(existingUser);
-               existingUser.setUserStatus(UserStatus.ONLINE);
                return true;
            }
        }
        return false; // User not found or password incorrect
    }
 
-    public boolean logout(User user) {
-        for (int i = 0; i < db.getConnectedUsers().size(); i++) {
-            if (db.getConnectedUsers().get(i).getAcctNum().equals(user.getAcctNum())) {
-                db.getConnectedUsers().remove(i);
+    private boolean logout(User user) {
+        for (User existingUser : db.getConnectedUsers().values()) {
+            if (existingUser.getUsername().equals(user.getUsername()) &&
+                    existingUser.getPassword().equals(user.getPassword())) {
+                db.removeConnectedUserFromList(existingUser);
+                return true;
             }
         }
-        return true;
+        return false; // User information lost
     }
 
-    public void writeToGroup(Group group, Message message) {
+    private void writeToGroup(Group group, Message message) {
         group.getMessageList().add(message);
 
         // Construct Packet for successful database update
     }
 
-    public Packet readGroup(Group group) {
+    private Packet readGroup(Group group) {
         ArrayList<Message> list = group.getMessageList();
 
         // Construct Packet to send back list to print
         return new Packet();
     }
-    public void writeToChat(Chat chat, Message message) {
+    private void writeToChat(Chat chat, Message message) {
         if (db.getChats().containsKey(chat.getChatID())) {
             chat.msgList.add(message);
         }
@@ -195,11 +196,11 @@ public class RequestHandler {
 //        }
    }
 
-    public Packet readChat(Chat chat) {
+    private Packet readChat(Chat chat) {
         return new Packet(PacketType.REQUEST, RequestType.RECEIVE_MESSAGE_CHAT, chat);
     }
 
-    public void resetPacket(Packet packet) {
+    private void resetPacket(Packet packet) {
         // Resetting fields to default values
         packet.setPacketType(null);
         packet.setRequestType(null);

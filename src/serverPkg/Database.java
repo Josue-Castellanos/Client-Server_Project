@@ -57,6 +57,13 @@ public class Database {
 	public Map<String, Group> getGroups() {
 		return groups;
 	}
+	public int getActiveGroups() {
+		return activeGroups;
+	}
+
+	public static int getActiveChats() {
+		return activeChats;
+	}
 
 	/* =================== MUTATORS ======================*/
 
@@ -64,9 +71,9 @@ public class Database {
 		if (getConnectedUsers().containsKey(user.getAcctNum())) {
 			getConnectedUsers().remove(user.getAcctNum());
 			getDisconnectedUsers().put(user.getAcctNum(), user);
-
+			System.out.println("[Database] User " + user.getAcctNum() + " logout accepted!");
 		} else {
-			System.out.println("\nUser " + user.getAcctNum() + " is not connected.\n");
+			System.out.println("[Database] User " + user.getAcctNum() + " not connected!");
 		}
 	}
 
@@ -74,23 +81,25 @@ public class Database {
 		if (!getConnectedUsers().containsKey(user.getAcctNum())) {
 			getConnectedUsers().put(user.getAcctNum(), user);
 		} else {
-			System.out.println("\nUser " + user.getAcctNum() + " is already connected.\n");
+			System.out.println("[Database] User " + user.getAcctNum() + " already connected!");
 		}
 	}
 
 	public void addUserToUserList(User user) {
 		if (!getGeneralUsers().containsKey(user.getAcctNum())) {
 			getGeneralUsers().put(user.getAcctNum(), user);
+			System.out.println("[Database] User " + user.getAcctNum() + " created!");
 		} else {
-			System.out.println("\nUser " + user.getAcctNum() + " already exists. \n");
+			System.out.println("[Database] User " + user.getAcctNum() + " already exists!");
 		}
 	}
 
 	public void removeUserFromUserList(String userID) {
 		if (getGeneralUsers().containsKey(userID)) {
 			getGeneralUsers().remove(userID);
+			System.out.println("[Database] User " + userID + " deleted");
 		} else {
-			System.out.println("\nUser " + userID + " is not found. \n");
+			System.out.println("[Database] User " + userID + " not found");
 		}
 	}
 
@@ -105,24 +114,30 @@ public class Database {
 			if (list.contains(userID)) {
 				list.remove(userID);
 				groupCount--;
-				// Remove userID from private/public groups
+				System.out.println("[Database] User " + userID + " removed from group " + groupID);
+				// Remove userID from private
 				if (group.getPrivacy() ) {
 					getPrivateGroups().get(groupID).getUserList().remove(userID);
+					System.out.println("[Database] User " + userID + " removed from private group " + groupID);
 
-				} else {
+				}
+				// Remove userID from public
+				else {
 					getPublicGroups().get(groupID).getUserList().remove(userID);
+					System.out.println("[Database] User " + userID + " removed from public group " + groupID);
 				}
 				// Remove group if it becomes empty after removing the user.
 				if (groupCount == 0) {
 					removeGroupFromGroupList(group);
+					System.out.println("[Database] Group " + group.getGroupID() + " empty and removed");
 				}
 			}
 			else {
-				System.out.println("\nUser " + userID + " is not in group.\n");
+				System.out.println("[Database] User " + userID + " not in group " + groupID);
 			}
 		}
 		else {
-			System.out.println("\nGroup " + groupID + " not found.\n");
+			System.out.println("[Database] Group " + groupID + " not found");
 		}
 	}
 
@@ -135,20 +150,22 @@ public class Database {
 			if (!list.contains(userID)) {
 				list.add(userID);
 				groupCount++;
+				System.out.println("[Database] User " + userID + " added to group " + groupID);
 				// Add userID to private/public groups
 				if (group.getPrivacy() ) {
 					getPrivateGroups().get(groupID).getUserList().add(userID);
-
+					System.out.println("[Database] User " + userID + " added to private group " + groupID);
 				} else {
 					getPublicGroups().get(groupID).getUserList().add(userID);
+					System.out.println("[Database] User " + userID + " added to public group " + groupID);
 				}
 			}
 			else {
-				System.out.println("\nUser " + userID + " already in group.\n");
+				System.out.println("[Database] User " + userID + " already in group " + groupID);
 			}
 		}
 		else {
-			System.out.println("\nGroup " + groupID + " not found.\n");
+			System.out.println("[Database] Group " + groupID + " not found");
 		}
 	}
 
@@ -163,17 +180,19 @@ public class Database {
 			if (list.contains(userID)) {
 				list.remove(userID);
 				chatCount--;
+				System.out.println("[Database] User " + userID + " removed from chat " + chatID);
 				// Remove group if it becomes empty after removing the user.
 				if (chatCount == 1) {
 					removeChatFromChatList(chat);
+					System.out.println("[Database] Chat " + chatID + " empty and removed");
 				}
 			}
 			else {
-				System.out.println("\nUser " + userID + " is not in chat.\n");
+				System.out.println("[Database] User " + userID + " not in chat " + chatID);
 			}
 		}
 		else {
-			System.out.println("\nChat " + chatID + " not found.\n");
+			System.out.println("[Database] Chat " + chatID + " not found");
 		}
 	}
 
@@ -186,48 +205,57 @@ public class Database {
 			if (!list.contains(userID)) {
 				list.add(userID);
 				chatCount++;
+				System.out.println("[Database] User " + userID + " added to chat " + chatID);
 			}
 			else {
-				System.out.println("\nUser " + userID + " already in chat.\n");
+				System.out.println("[Database] User " + userID + " already in chat " + chatID);
 			}
 		}
 		else {
-			System.out.println("\nChat " + chatID + " not found.\n");
+			System.out.println("[Database] Chat " + chatID + " not found");
 		}
 	}
 
 	// Group methods
 	public void addGroupToGroupList(Group group) {
 		getGroups().put(group.getGroupID(), group);
+		System.out.println("[Database] Group " + group.getGroupID() + " created!");
 		if (group.getPrivacy()) {
 			getPrivateGroups().put(group.getGroupID(), group);
+			System.out.println("[Database] Private Group " + group.getGroupID() + " added");
 		} else {
 			getPublicGroups().put(group.getGroupID(), group);
+			System.out.println("[Database] Public Group " + group.getGroupID() + " added");
 		}
 	}
 
 	public void removeGroupFromGroupList(Group group) {
 		getGroups().remove(group.getGroupID());
+		System.out.println("[Database] Group " + group.getGroupID() + " deleted!");
 		if (group.getPrivacy()) {
 			getPrivateGroups().remove(group.getGroupID(), group);
+			System.out.println("[Database] Private Group " + group.getGroupID() + " removed");
 		} else {
 			getPublicGroups().remove(group.getGroupID(), group);
+			System.out.println("[Database] Public Group " + group.getGroupID() + " removed");
 		}
 	}
 
 	public void addChatToChatList(Chat chat) {
 		if (!getChats().containsKey(chat.getChatID())) {
 			getChats().put(chat.getChatID(), chat);
+			System.out.println("[Database] Chat " + chat.getChatID() + " created!");
 		} else {
-			System.out.println("\nChat " + chat.getChatID() + " already exists. \n");
+			System.out.println("[Database] Chat " + chat.getChatID() + " already exists");
 		}
 	}
 
 	public void removeChatFromChatList(Chat chat) {
 		if (getChats().containsKey(chat.getChatID())) {
 			getChats().remove(chat.getChatID(), chat);
+			System.out.println("[Database] Chat " + chat.getChatID() + " deleted!");
 		} else {
-			System.out.println("\nChat " + chat.getChatID() + " does not exists. \n");
+			System.out.println("[Database] Chat " + chat.getChatID() + " not found");
 		}
 	}
 }

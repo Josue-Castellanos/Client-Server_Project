@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Initial commit" />
+    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Implemented comments and finalized classes except handler classes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientPkg/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/packetPkg/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/packetPkg/Packet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/RequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverPkg/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Server.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +80,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/jcast/IdeaProjects/Client-Server_Project",
+    "last_opened_file_path": "/Users/workcomputer/IntelliJProjects/Communication_Project/src/clientPkg",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -115,19 +126,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Communication_Project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Communication_Project" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.clientPkg.Main" />
       <item itemvalue="Application.Main" />
@@ -142,7 +140,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-868cef46" />
+        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-396cc1b2" />
       </set>
     </attachedChunks>
   </component>
@@ -164,6 +162,9 @@
       <workItem from="1710718225731" duration="10001000" />
       <workItem from="1710869223070" duration="878000" />
       <workItem from="1710875208765" duration="18461000" />
+      <workItem from="1710909223626" duration="45000" />
+      <workItem from="1710909715479" duration="19109000" />
+      <workItem from="1711041869310" duration="7520000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -207,11 +208,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="4" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/serverPkg/ClientHandler.java</url>
-          <line>98</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
