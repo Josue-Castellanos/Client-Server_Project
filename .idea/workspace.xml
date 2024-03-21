@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientPkg/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientPkg/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/packetPkg/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/packetPkg/Packet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Chat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/UserType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/UserType.java" afterDir="false" />
-    </list>
+    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Initial commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,9 +40,9 @@
     <setting file="file://$PROJECT_DIR$/src/clientPkg/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/serverPkg/Main.java" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -83,7 +69,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/workcomputer/IntelliJProjects/Communication_Project/src/clientPkg",
+    "last_opened_file_path": "C:/Users/jcast/IdeaProjects/Client-Server_Project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -125,6 +111,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Communication_Project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Communication_Project" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
