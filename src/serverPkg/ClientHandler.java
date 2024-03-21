@@ -18,7 +18,6 @@ public class ClientHandler implements Runnable {
 	public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 	private Socket clientSocket;
     private BufferedWriter bufferedWriter;
-	private BufferedReader bufferedReader;
 	private ObjectInputStream inputStream;
     private final RequestHandler requestHandler = new RequestHandler();
     private String clientUsername;
@@ -32,9 +31,13 @@ public class ClientHandler implements Runnable {
 			this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 			this.inputStream = new ObjectInputStream(clientSocket.getInputStream());
 			// Read login packet from the client
-            this.loginPacket = readPacket();		// This line of code is causing errors
+            this.loginPacket = readPacket();
 
-			// Authenticate user to Change UserStatus, StatusType,
+			// Authenticate user by UserStatus (ONLINE) or Packet StatusType (SUCCESS)
+
+			if (requestHandler.receivePacket(loginPacket).getUser().getUserStatus().equals(UserStatus.ONLINE)) {
+				System.out.println("[SERVER] User " + loginPacket.getUser().getAcctNum() + " authenticated!");
+			}
 			this.clientUsername = loginPacket.getUser().getUsername();
 
 			clientHandlers.add(this);
@@ -53,9 +56,9 @@ public class ClientHandler implements Runnable {
 	// Send message to chat
 	private void broadcastMessage(String messageToSend, Packet sendPacket) {
 		// Process packet
-		//String packetProcessed = requestHandler.receivePacket(sendPacket);
+		//Packet requestProcessed = requestHandler.receivePacket(sendPacket);
 
-		//if(Objects.equals(packetProcessed, "SUCCESS")) {
+		//if(requestProcessed.getStatusType() == StatusType.SUCCESS) {
 			for(ClientHandler clientHandler: clientHandlers) {
 				try {
 					// If the clients name in the clientHandlers list does not match the
@@ -121,6 +124,7 @@ public class ClientHandler implements Runnable {
 			}
 			if(socket != null) {
 				socket.close();
+
 			}
 		}
 		catch(IOException e) {

@@ -47,11 +47,10 @@ public class Packet implements Serializable{
 	}
 
 	//Login and Logout Constructor
-	public Packet(PacketType packet, RequestType request, StatusType status, UserStatus newStatus, Chat newChat, User newUser, String newLocation, Integer newPort){
+	public Packet(PacketType packet, RequestType request, StatusType status, Chat newChat, User newUser, String newLocation, Integer newPort){
 		this.setPacketType(packet);
 		this.setRequestType(request);
 		this.setStatusType(status);
-		this.setUserStatus(newStatus);
 		this.setChat(newChat);
 		this.setUser(newUser);
 		this.setLocation(newLocation);

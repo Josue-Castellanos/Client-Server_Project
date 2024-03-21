@@ -14,8 +14,9 @@ public class Chat implements Serializable {
     protected String createdByUser; //Name of user who created the Receiver
     private final String chatID;
     private int messageCount;   // Tracker of messages
+    private int count = 0;
     private String chatName;        // ChatName is the username of the recipient
-    protected int chatCount;
+    private int chatCount = 0;
 
     //Constructor
     public Chat(String user) {
@@ -24,8 +25,7 @@ public class Chat implements Serializable {
         this.msgList = new ArrayList<>();
         this.created = new Date();
         this.chatID = idGenerator();
-        this.messageCount = 0;
-        this.chatCount = 1;
+        this.messageCount = count++;
 
         userList.add(user);
     }

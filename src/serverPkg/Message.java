@@ -5,11 +5,13 @@ import java.util.Date;
 
 
 public class Message implements Serializable{
-	protected String fromAcctNum;
-    protected String destinationID;
-    protected String message;
-    protected Date date;
-    protected MsgType msgType;
+	private String fromAcctNum;
+    private String destinationID;
+    private String message;
+    private Date date;
+    private MsgType msgType;
+    //private int id;   Add a id to message to store in HashMap
+
 
     //Default Constructor
     public Message() {

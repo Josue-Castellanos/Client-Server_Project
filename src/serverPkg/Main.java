@@ -8,10 +8,10 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		// server is listening on port 1234
-		ServerSocket listener = new ServerSocket(PORT);
+		ServerSocket serverListener = new ServerSocket(PORT);
 
-		System.out.println("[SERVER ONLINE] Waiting for client connection...");
-		Server server = new Server(listener);
+		System.out.println("[SERVER ONLINE] Waiting for clients connection...");
+		Server server = new Server(serverListener);
 		server.startServer();
 	}
 
