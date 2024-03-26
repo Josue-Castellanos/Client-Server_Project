@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/serverPkg/ServerGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/serverPkg/ServerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24,_10_00 PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24__10_00PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientPkg/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +191,7 @@
       <workItem from="1710909223626" duration="45000" />
       <workItem from="1710909715479" duration="19109000" />
       <workItem from="1711041869310" duration="7520000" />
-      <workItem from="1711427655448" duration="7282000" />
+      <workItem from="1711427655448" duration="7395000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -262,7 +257,23 @@
       <option name="project" value="LOCAL" />
       <updated>1711426807614</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Created Server GUI">
+      <option name="closed" value="true" />
+      <created>1711435013165</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1711435013165</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Integrating main.Client Class functionality into Client GUI.">
+      <option name="closed" value="true" />
+      <created>1711435069294</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1711435069294</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,6 +307,8 @@
     <MESSAGE value="Changed hard coded users for testing to static type so the users are only initialized once when the class is loaded." />
     <MESSAGE value="Removed unnecessary comments and removed getUser() from the constructor. The packet instance only has username and password for authentication instead of a User instance." />
     <MESSAGE value="Made changes to authentication method to correctly initialize the user with usernamen adn password instead of a User instance." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made changes to authentication method to correctly initialize the user with usernamen adn password instead of a User instance." />
+    <MESSAGE value="Created Server GUI" />
+    <MESSAGE value="Integrating main.Client Class functionality into Client GUI." />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrating main.Client Class functionality into Client GUI." />
   </component>
 </project>
