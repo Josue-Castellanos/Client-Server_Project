@@ -14,19 +14,16 @@ public class Database {
 	private static int activeGroups = 0; 	// Tracker of groups.
 	private static int activeChats = 0; 	// Tracker of chats.
 
-
-	public Database() {
+	static {
 		User a = new User("adam", "a", "1", UserType.GENERAL, UserStatus.OFFLINE);
 		User b = new User("josh", "b", "2", UserType.GENERAL, UserStatus.OFFLINE);
 		User c = new User("cash", "c", "3", UserType.GENERAL, UserStatus.OFFLINE);
 		users.put(a.getAcctNum(), a);
 		users.put(b.getAcctNum(), b);
 		users.put(c.getAcctNum(), c);
-
 		disconnectedUsers.put(a.getAcctNum(), a);
 		disconnectedUsers.put(b.getAcctNum(), b);
 		disconnectedUsers.put(c.getAcctNum(), c);
-
 	}
 
 	/* ================= GETTERS =====================*/
@@ -61,7 +58,7 @@ public class Database {
 		return activeGroups;
 	}
 
-	public static int getActiveChats() {
+	public int getActiveChats() {
 		return activeChats;
 	}
 
