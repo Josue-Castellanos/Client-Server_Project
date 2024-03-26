@@ -4,12 +4,13 @@ import packetPkg.StatusType;
 
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class User implements Serializable {
-
 	protected String displayName;
-	protected String acctNum;
+	protected final String acctNum;
 	protected String username;
 	protected String password;
     protected UserType userType;
@@ -17,6 +18,9 @@ public class User implements Serializable {
 	protected ArrayList<String> groupList;	//Unique groupID should be stored here.
 	protected ArrayList<String> chatList;	//Unique chatID should be stored here.
     protected ArrayList<String> blockList;	//Unique userID should be stored here.
+
+    // Maintain a set of used account numbers to ensure uniqueness
+    private static final Set<String> usedAccountNumbers = new HashSet<>();
 
 	public User() {
 		this(null,null,null, null, null);
@@ -75,10 +79,6 @@ public class User implements Serializable {
         this.displayName = newName;
     }
 
-    public void setAcctNum(String newAcct) {
-        this.acctNum = newAcct;
-    }
-
     public void setUsername(String newUsername) {
         this.username = newUsername;
     }
@@ -104,9 +104,14 @@ public class User implements Serializable {
     }
 
     private String idGenerator() {
-        // Generate random id, for example 283952-V8M32
+        // Generate random id, for example 283952-GU
         Random rnd = new Random();
-        return (100000 + rnd.nextInt(900000)) + "-" + "U";
+        String newAcctNum;
+        do {
+            newAcctNum = (100000 + rnd.nextInt(900000)) + "-" + "GU";
+        } while (usedAccountNumbers.contains(newAcctNum)); // Ensure uniqueness
+        usedAccountNumbers.add(newAcctNum); // Add the generated account number to the set
+        return newAcctNum;
     }
 }
 

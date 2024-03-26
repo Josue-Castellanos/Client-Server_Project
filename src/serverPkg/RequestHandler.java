@@ -4,7 +4,7 @@ import packetPkg.*;
 import java.util.ArrayList;
 
 public class RequestHandler {
-    private Database db = new Database();
+    private static final Database db = new Database();
     private Packet processedPacket;
 
     public Packet receivePacket(Packet packet) {
@@ -75,15 +75,17 @@ public class RequestHandler {
     private Packet handleLoginPacket(Packet packet) {
         // If authentication was successful:
         // User will have User Status ONLINE
-        if (authenticateUser(packet.getUser())) {
+        User userAuthenticated = authenticateUser(packet.getUsername(), packet.getPassword());
+        if (userAuthenticated != null) {
             // Set Packet Status to SUCCESSFUL request
-            packet.setStatusType(StatusType.SUCCESS);
+            packet.setUser(userAuthenticated);
             packet.getUser().setUserStatus(UserStatus.ONLINE);
+            packet.setUserStatus(UserStatus.ONLINE);
+            packet.setStatusType(StatusType.SUCCESS);
         }
         // Packet Status FAIL when login authentication failed.
         else {
             packet.setStatusType(StatusType.FAIL);
-            packet.getUser().setUserStatus(UserStatus.OFFLINE);
         }
         return packet;
     }
@@ -152,15 +154,20 @@ public class RequestHandler {
 
 
    /*============== SUPPORTING METHODS ===================*/
-   private boolean authenticateUser(User user) {
+   private User authenticateUser(String username, String password) {
+       // Checking the HashMap for Users
        for (User existingUser : db.getGeneralUsers().values()) {
-           if (existingUser.getUsername().equals(user.getUsername()) &&
-                   existingUser.getPassword().equals(user.getPassword())) {
-               db.addConnectedUserToList(existingUser);
-               return true;
+           // If a User shares username and password, check if they are online
+           if (existingUser.getUsername().equals(username) &&
+                   existingUser.getPassword().equals(password)) {
+               // If User is not online, add them to connected user list
+               if(!db.getConnectedUsers().containsValue(existingUser)) {
+                   db.addConnectedUserToList(existingUser);
+                   return existingUser;
+               }
            }
        }
-       return false; // User not found or password incorrect
+       return null; // User not found or password incorrect
    }
 
     private boolean logout(User user) {

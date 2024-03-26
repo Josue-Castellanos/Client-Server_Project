@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Implemented comments and finalized classes except handler classes">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24__10_00PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24__10_00PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Removed unnecessary comments and removed getUser() from the constructor. The packet instance only has username and password for authentication instead of a User instance.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientPkg/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientPkg/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/packetPkg/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/packetPkg/Packet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/serverPkg/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/RequestHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/serverPkg/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/User.java" afterDir="false" />
     </list>
@@ -173,7 +167,55 @@
       <option name="project" value="LOCAL" />
       <updated>1710651093649</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Git requirement push">
+      <option name="closed" value="true" />
+      <created>1711425830324</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1711425830324</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Removed unnecessary comments and removed getUser() from the constructor. The packet instance only has username and password for authentication instead of a User instance.&#10;&#10;Change Runnable to lambda per IDE request.">
+      <option name="closed" value="true" />
+      <created>1711426143879</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1711426143879</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Removed User and Chat since the authentication method changed to username and password instead of User instance. Chat was unnecessary to have since a User hasnt chosen what type of chat room.">
+      <option name="closed" value="true" />
+      <created>1711426281423</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1711426281423</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added new Packet for recurring user logins using username and password and modified the original login packet for new user account creation withg user instance.">
+      <option name="closed" value="true" />
+      <created>1711426410822</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1711426410822</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Broke down the If statement to improve legibility.">
+      <option name="closed" value="true" />
+      <created>1711426584542</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1711426584542</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changed hard coded users for testing to static type so the users are only initialized once when the class is loaded.">
+      <option name="closed" value="true" />
+      <created>1711426737963</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1711426737963</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,6 +240,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Git requirement push" />
+    <MESSAGE value="Implemented comments and finalized classes except handler classes" />
+    <MESSAGE value="Removed unnecessary comments and removed getUser() from the constructor. The packet instance only has username and password for authentication instead of a User instance.&#10;&#10;Change Runnable to lambda per IDE request." />
+    <MESSAGE value="Removed User and Chat since the authentication method changed to username and password instead of User instance. Chat was unnecessary to have since a User hasnt chosen what type of chat room." />
+    <MESSAGE value="Added new Packet for recurring user logins using username and password and modified the original login packet for new user account creation withg user instance." />
+    <MESSAGE value="Broke down the If statement to improve legibility." />
+    <MESSAGE value="Removed unnecessary comments and removed getUser() from the constructor. The packet instance only has username and password for authentication instead of a User instance." />
+    <MESSAGE value="Changed hard coded users for testing to static type so the users are only initialized once when the class is loaded." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed hard coded users for testing to static type so the users are only initialized once when the class is loaded." />
   </component>
 </project>
