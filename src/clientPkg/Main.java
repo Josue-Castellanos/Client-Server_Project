@@ -7,10 +7,7 @@ import packetPkg.Packet;
 import packetPkg.PacketType;
 import packetPkg.RequestType;
 import packetPkg.StatusType;
-import serverPkg.User;
-import serverPkg.UserStatus;
-import serverPkg.UserType;
-import serverPkg.Chat;
+
 
 public class Main {
 
@@ -27,12 +24,8 @@ public class Main {
 		System.out.println("Enter password: ");
 		String password = scanner.nextLine();
 
-		// Construct User
-		User newUser = new User(username, username, password, UserType.GENERAL, UserStatus.PROGRESS);
-		// Construct Chat
-		Chat newChat = new Chat(newUser.getAcctNum());
 		// Construct Login Packet
-		Packet loginPacket = new Packet(PacketType.REQUEST, RequestType.LOGIN, StatusType.PROGRESS, newChat, newUser, LOCATION, PORT);
+		Packet loginPacket = new Packet(PacketType.REQUEST, RequestType.LOGIN, StatusType.PROGRESS, username, password, LOCATION, PORT);
 
 		// Construct Socket
 		Socket socket = new Socket(LOCATION, PORT);
