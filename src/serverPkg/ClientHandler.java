@@ -33,13 +33,15 @@ public class ClientHandler implements Runnable {
 			// Read login packet from the client
             this.loginPacket = readPacket();
 
-			// Authenticate user by UserStatus (ONLINE) or Packet StatusType (SUCCESS)
 
-			if (requestHandler.receivePacket(loginPacket).getUser().getUserStatus().equals(UserStatus.ONLINE)) {
+			Packet authenticatePacket = requestHandler.receivePacket(loginPacket);
+			User authenticateUser = authenticatePacket.getUser();
+			// Authenticate user by UserStatus (ONLINE) or Packet StatusType (SUCCESS)
+			if (authenticateUser.getUserStatus().equals(UserStatus.ONLINE) &&
+				authenticatePacket.getStatusType().equals(StatusType.SUCCESS)) {
 				System.out.println("[SERVER] User " + loginPacket.getUser().getAcctNum() + " authenticated!");
 			}
 			this.clientUsername = loginPacket.getUser().getUsername();
-
 			clientHandlers.add(this);
 			broadcastMessage("SERVER: " + clientUsername + " has entered the chat!", loginPacket);
 		}
