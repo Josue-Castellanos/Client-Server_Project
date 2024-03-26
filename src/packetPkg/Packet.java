@@ -19,6 +19,8 @@ public class Packet implements Serializable{
 	protected ArrayList<Group>groupList;
 	protected ArrayList<Chat>chatList;
 	protected User user;
+	private String username;
+	private String password;
 	protected ArrayList<User> userList;
 	protected String string;
 
@@ -26,12 +28,12 @@ public class Packet implements Serializable{
 	public Packet(){
 		this(null, null, null, null, null,
 				null, null, null,
-				null, null, null, null);
+				null, null, null, null, null, null);
 	}
 	// Custom Constructor
 	public Packet(PacketType newType, RequestType newRequest, StatusType newStatus, Message newMessage,
 				  ArrayList<Message> newMsgList, Group newGroup, Chat newChat,
-				  User newUser, ArrayList<User> newUserList, String newString, String newLocation, Integer newPort) {
+				  User newUser, String newUsername, String newPassword, ArrayList<User> newUserList, String newString, String newLocation, Integer newPort) {
 		this.setPacketType(newType);
 		this.setRequestType(newRequest);
 		this.setStatusType(newStatus);
@@ -46,13 +48,24 @@ public class Packet implements Serializable{
 		this.setPort(newPort);
 	}
 
-	//Login and Logout Constructor
+	// New Login and Logout Constructor
 	public Packet(PacketType packet, RequestType request, StatusType status, Chat newChat, User newUser, String newLocation, Integer newPort){
 		this.setPacketType(packet);
 		this.setRequestType(request);
 		this.setStatusType(status);
 		this.setChat(newChat);
 		this.setUser(newUser);
+		this.setLocation(newLocation);
+		this.setPort(newPort);
+	}
+
+	//Login and Logout Constructor
+	public Packet(PacketType packet, RequestType request, StatusType status, String username, String password, String newLocation, Integer newPort){
+		this.setPacketType(packet);
+		this.setRequestType(request);
+		this.setStatusType(status);
+		this.setUsername(username);
+		this.setPassword(password);
 		this.setLocation(newLocation);
 		this.setPort(newPort);
 	}
@@ -169,6 +182,14 @@ public class Packet implements Serializable{
 	public User getUser(){
 		return user;
 	}
+	public String getUsername() {
+		return this.username;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
 
 	// Get Inet address (location)
 	public String getLocation() {
@@ -232,6 +253,14 @@ public class Packet implements Serializable{
 	public void setUser(User newUser){
 		this.user = newUser;
 	}
+	public void setUsername(String newUsername){
+		this.username = newUsername;
+	}
+
+	public void setPassword(String newPassword){
+		this.password = newPassword;
+	}
+
 
 	public void setUserList(ArrayList<User> newUser){
 		this.userList = newUser;
