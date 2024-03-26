@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="Removed unnecessary comments and removed getUser() from the constructor. The packet instance only has username and password for authentication instead of a User instance.">
+    <list default="true" id="3d450354-e00d-4e30-8b87-ed0544caf07e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/serverPkg/ServerGUI.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/serverPkg/ServerGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24,_10_00 PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_16_24__10_00PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serverPkg/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverPkg/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientPkg/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientPkg/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -64,8 +67,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.GUI.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.Server.executor": "Run",
+    "Application.ServerGUI.executor": "Run",
     "Application.clientPkg.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -80,7 +85,10 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/workcomputer/IntelliJProjects/Communication_Project/src/Main.java",
-    "settings.editor.selected.configurable": "configurable.group.editor",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -92,9 +100,35 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.clientPkg.Main">
+  <component name="RunManager" selected="Application.GUI">
+    <configuration name="GUI" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="clientPkg.GUI" />
+      <module name="Communication_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="clientPkg.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="serverPkg.Main" />
+      <module name="Communication_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="serverPkg.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="serverPkg.ServerGUI" />
       <module name="Communication_Project" />
       <extension name="coverage">
         <pattern>
@@ -120,20 +154,24 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.GUI" />
+      <item itemvalue="Application.ServerGUI" />
       <item itemvalue="Application.clientPkg.Main" />
       <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.clientPkg.Main" />
+        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ServerGUI" />
+        <item itemvalue="Application.clientPkg.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-396cc1b2" />
+        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-868cef46" />
       </set>
     </attachedChunks>
   </component>
@@ -158,6 +196,7 @@
       <workItem from="1710909223626" duration="45000" />
       <workItem from="1710909715479" duration="19109000" />
       <workItem from="1711041869310" duration="7520000" />
+      <workItem from="1711427655448" duration="7282000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -215,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711426737963</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Made changes to authentication method to correctly initialize the user with usernamen adn password instead of a User instance.">
+      <option name="closed" value="true" />
+      <created>1711426807614</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711426807614</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,8 +293,9 @@
     <MESSAGE value="Removed User and Chat since the authentication method changed to username and password instead of User instance. Chat was unnecessary to have since a User hasnt chosen what type of chat room." />
     <MESSAGE value="Added new Packet for recurring user logins using username and password and modified the original login packet for new user account creation withg user instance." />
     <MESSAGE value="Broke down the If statement to improve legibility." />
-    <MESSAGE value="Removed unnecessary comments and removed getUser() from the constructor. The packet instance only has username and password for authentication instead of a User instance." />
     <MESSAGE value="Changed hard coded users for testing to static type so the users are only initialized once when the class is loaded." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed hard coded users for testing to static type so the users are only initialized once when the class is loaded." />
+    <MESSAGE value="Removed unnecessary comments and removed getUser() from the constructor. The packet instance only has username and password for authentication instead of a User instance." />
+    <MESSAGE value="Made changes to authentication method to correctly initialize the user with usernamen adn password instead of a User instance." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made changes to authentication method to correctly initialize the user with usernamen adn password instead of a User instance." />
   </component>
 </project>
