@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import packetPkg.*;
 import serverPkg.Message;
-import serverPkg.User;
 
 public class Client {
 
@@ -23,7 +22,7 @@ public class Client {
 			this.clientSocket = socket;
 			this.outputStream = new ObjectOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
 			this.bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			this.username = packet.getUser().getUsername();
+			this.username = packet.getUsername();
 			this.loginPacket = packet;
 
 		} catch (IOException e) {
@@ -41,9 +40,6 @@ public class Client {
 		try {
 			// Send login packet
 			sendPacket(loginPacket);
-
-			// Start listening for messages from the server
-			//listenForMessage();
 
 			Scanner scanner = new Scanner(System.in);
 			while (clientSocket.isConnected() ) {
@@ -63,20 +59,17 @@ public class Client {
 
 	public void listenForMessage() {
 		// Replaced new Runnable() with lambda ->
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				String messageFromGroupChat;
-				while (clientSocket.isConnected()) {
-					try {
-						messageFromGroupChat = bufferedReader.readLine();
-						System.out.println(messageFromGroupChat);
-					} catch (IOException e) {
-						closeChat(clientSocket, bufferedReader, outputStream);
-					}
-				}
-			}
-		}).start();
+		new Thread(() -> {
+            String messageFromGroupChat;
+            while (clientSocket.isConnected()) {
+                try {
+                    messageFromGroupChat = bufferedReader.readLine();
+                    System.out.println(messageFromGroupChat);
+                } catch (IOException e) {
+                    closeChat(clientSocket, bufferedReader, outputStream);
+                }
+            }
+        }).start();
 	}
 
 	public void closeChat(Socket socket, BufferedReader bufferedReader, ObjectOutputStream outputStream) {
